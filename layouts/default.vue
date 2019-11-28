@@ -2,7 +2,7 @@
 <v-app>
     <navBar/>
     <Header :fullHeight="fullHeight" :title="title" :subtitle="subtitle"/>
-    <v-content style="margin-bottom: 100px;">
+    <v-content style="margin-bottom: 100px; background: #ffffff !important;">
         <nuxt />
     </v-content>
     <Footer/>
