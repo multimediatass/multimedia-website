@@ -18,9 +18,9 @@
 
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn small to="/" text>Home</v-btn>
-        <!-- <v-btn small to="/about" text>About</v-btn>
+        <v-btn small to="/about" text>About</v-btn>
         <v-btn small to="/product" text>Product</v-btn>
-        <v-btn small to="/activity" text>Activity</v-btn> -->
+        <v-btn small to="/activity" text>Activity</v-btn>
         <v-btn small to="/peminjaman" text>Peminjaman</v-btn>
       </v-toolbar-items>
 
