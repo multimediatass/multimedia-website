@@ -49,6 +49,9 @@
 </template>
 <script>
 import axios from 'axios'
+// const bash = "https://multimedia-site.herokuapp.com"
+const bash = "http://localhost:3000"
+
 export default {
     data:()=>({
         email: '',
@@ -56,11 +59,11 @@ export default {
         alert: {type: null, message: null},
         loading: null
     }),
-    asyncData({ params, error }) {
-        return axios.get('http://localhost:3000/api/next-movie').then((res) => {
-            return { movie: res.data }
-        })
-    },
+    // asyncData({ params, error }) {
+    //     return axios.get('http://localhost:3000/api/next-movie').then((res) => {
+    //         return { movie: res.data }
+    //     })
+    // },
     methods: {
         signin() {
             const vm = this
@@ -68,7 +71,7 @@ export default {
             vm.loading = true
             axios({
                 method: 'post',
-                url: url.bash+url.signin,
+                url: bash+"/api/signin",
                 data: {
                     email: this.email,
                     password: this.password

@@ -3,50 +3,93 @@
     
     <template v-if="imgPosition == 'left'">
         <div class="contentImg">
-            <v-img
+            <!-- <v-img
                 :src="image"
                 :lazy-src="image"
                 transition="fade-transition"
                 class="grey lighten-2"
-            ></v-img>
+            ></v-img> -->
+            <v-carousel
+                hide-delimiters
+                continuous="true"
+                :cycle="true"
+                :show-arrows="image.length > 1"
+                transition="fade-transition"
+                class="grey lighten-2 responsive-media"
+            >
+                <v-carousel-item
+                    v-for="(i, index) in image" :key="index"
+                    :src="i"
+                    :lazy-src="i"
+                >
+                </v-carousel-item>
+            </v-carousel>
         </div>
         <div class="contentText">
-            <h3 class="tagText">Tag</h3>
+            <h3 class="tagText">{{tag}}</h3>
             <h1 class="titleText">{{title}}</h1>
-            <p class="subtitleText">We carried out the UX and UI design for two editions of the event site.</p>
-            <br>
-            <router-link :to="link" class="btnMore">View {{title}}</router-link>
+            <p class="subtitleText">{{subtitle}}</p>
+            <router-link :to="link" class="btnMore">Baca Selengkapnya</router-link>
         </div>
     </template>
     <template v-else-if="imgPosition == 'right'">
         <div class="contentText">
-            <h3 class="tagText">Tag</h3>
+            <h3 class="tagText">{{tag}}</h3>
             <h1 class="titleText">{{title}}</h1>
-            <p class="subtitleText">We carried out the UX and UI design for two editions of the event site.</p>
-            <br>
-            <router-link :to="link" class="btnMore">View {{title}}</router-link>
+            <p class="subtitleText">{{subtitle}}</p>
+            <router-link :to="link" class="btnMore">Baca Selengkapnya</router-link>
         </div>
         <div class="contentImg">
-            <v-img
+            <!-- <v-img
                 :src="image"
                 :lazy-src="image"
                 transition="fade-transition"
                 class="grey lighten-2"
-            ></v-img>
+            ></v-img> -->
+             <v-carousel
+                hide-delimiters
+                continuous="true"
+                :cycle="true"
+                :show-arrows="image.length > 1"
+                transition="fade-transition"
+                class="grey lighten-2 responsive-media"
+            >
+                <v-carousel-item
+                    v-for="(i, index) in image" :key="index"
+                    :src="i"
+                    :lazy-src="i"
+                >
+                </v-carousel-item>
+            </v-carousel>
         </div>
     </template>
     <template v-else>
         <div class="contentImg full">
-            <v-img
+            <!-- <v-img
                 :src="image"
                 :lazy-src="image"
                 transition="fade-transition"
                 class="grey lighten-2"
-            ></v-img>
+            ></v-img> -->
+             <v-carousel
+                hide-delimiters
+                continuous="true"
+                :cycle="true"
+                :show-arrows="image.length > 1"
+                transition="fade-transition"
+                class="grey lighten-2 responsive-media"
+            >
+                <v-carousel-item
+                    v-for="(i, index) in image" :key="index"
+                    :src="i"
+                    :lazy-src="i"
+                >
+                </v-carousel-item>
+            </v-carousel>
         </div>
         <div class="contentText">
-            <h1 class="titleText">{{title}}</h1><br>
-            <router-link :to="link" class="btnMore">Pinjam Barang</router-link>
+            <h1 class="titleText">{{title}}</h1>
+            <router-link :to="link" class="btnMore">Baca Selengkapnya</router-link>
         </div>
     </template>
 
@@ -59,7 +102,8 @@ export default {
         subtitle: String,
         image: String,
         imgPosition: String,
-        link: String
+        link: String,
+        tag: String
     }
 }
 </script>
@@ -77,7 +121,7 @@ export default {
         border-style: solid;
         border-color: rgb(95, 5, 171);
         border-image: initial;
-        border-radius: 31px;
+        border-radius: 100px;
         transition: color 0.4s ease-in-out 0s;
         overflow: hidden;
         cursor: pointer;
@@ -123,7 +167,6 @@ export default {
             flex-direction: column;
             flex-wrap: wrap;
             width: 50%;
-            padding: 30px;
         
             h1 {
                 margin-bottom: 10px;
@@ -145,6 +188,12 @@ export default {
         }
 
         @media only screen and (min-width: 0) {
+            .btnMore {
+                padding: 8px 16px !important;
+                margin-top: 2.5px !important;
+                font-size: 13px !important;
+                border-width: 1.5px !important;
+            }
             .contentImg:last-child {
                 order: 1;
             }
@@ -154,6 +203,12 @@ export default {
 
             .contentText, .contentImg {
                 width: 100% !important;
+                padding: 10px !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                flex-wrap: wrap !important;
+                text-align: center !important;
             }
 
             .contentImg img{
@@ -161,20 +216,25 @@ export default {
             }
 
             .titleText {
-                font-size: 32px;
+                font-size: 21px !important;
             }
             .subtitleText {
                 color: rgb(115, 99, 127);
-                font-size: 21px;
+                font-size: 13px !important;
                 font-weight: 500;
             }
             .tagText {
-                font-size: 14px;
+                font-size: 14px !important;
             }
         }
 
         @media only screen and (min-width: 1264px){
-            
+            .btnMore {
+                padding: 16px 32px !important;
+                margin-top: 10px !important;
+                font-size: 14px !important;
+                border-width: 2px !important;
+            }
             .contentImg:last-child {
                 order: 2;
             }
@@ -184,6 +244,12 @@ export default {
 
             .contentText, .contentImg {
                 width: 50% !important;
+                padding: 30px !important;
+                display: flex;
+                justify-content: flex-start !important;
+                align-items: flex-start !important;
+                flex-wrap: wrap !important;
+                text-align: left !important;
             }
 
             .full {
@@ -202,15 +268,15 @@ export default {
             }
 
             .titleText {
-                font-size: 48px;
+                font-size: 48px !important;
             }
             .subtitleText {
                 color: rgb(115, 99, 127);
-                font-size: 21px;
+                font-size: 21px !important;
                 font-weight: 500;
             }
             .tagText {
-                font-size: 14px;
+                font-size: 14px !important;
             }
         }
     }
@@ -227,4 +293,88 @@ export default {
             padding: 15px !important;
         }
     }
+
+
+
+@media only screen and (min-width: 0) {
+    .responsive-media-card {
+        height: 225px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+    .responsive-media {
+        height: 225px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+}
+@media only screen and (min-width: 600px) {
+    .responsive-media-card {
+        height: 250px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+    .responsive-media {
+        height: 320px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+}
+@media only screen and (min-width: 960px){
+    .responsive-media-card {
+        height: 300px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+    .responsive-media {
+        height: 380px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+}
+@media only screen and (min-width: 1264px){
+    .responsive-media-card {
+        height: 320px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+    .responsive-media {
+        height: 400px !important;
+
+        .v-image {
+            height: 100% !important;
+        }
+    }
+}
+@media only screen and (min-width: 1904px){
+    .responsive-media-card {
+        height: 350px !important;
+
+        .v-image{
+            height: 100% !important;
+        }
+    }
+    .responsive-media {
+        height: 500px !important;
+
+        .v-image {
+            height: 100% !important;
+        }
+    }
+}
+
 </style>

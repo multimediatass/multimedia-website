@@ -3,8 +3,8 @@
    <v-app-bar
       app
       flat
-      height="65"
-      class="appbar px-2"
+      height="60"
+      class="appbar px-0 px-md-12"
       :color="colorNav"
       dark
       elevate-on-scroll
@@ -17,20 +17,56 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn small to="/" text>Home</v-btn>
-        <v-btn small to="/about" text>About</v-btn>
-        <v-btn small to="/product" text>Product</v-btn>
-        <v-btn small to="/activity" text>Activity</v-btn>
-        <v-btn small to="/peminjaman" text>Peminjaman</v-btn>
+        <template v-for="item in items">
+          
+          <v-btn v-if="item.child.length == 0" :key="item.title" small :to="item.link" text>{{item.title}}</v-btn>
+          <v-menu v-else open-on-hover offset-y transition="slide-y-transition" bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn small text :key="item.title" v-on="on">{{item.title}}</v-btn>
+            </template>
+            <v-list>
+
+            <v-list-item
+              v-for="c in item.child"
+              :key="c.title"
+              :to="c.link"
+              class="my-2 mx-2"
+            >
+              <v-list-item-avatar>
+                <v-icon
+                  :class="[c.icon]"
+                  v-text="c.icon"
+                ></v-icon>
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title v-text="c.title"></v-list-item-title>
+                <v-list-item-subtitle v-text="c.subtitle"></v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-list-item-action>
+                <!-- <v-btn icon>
+                  <v-icon color="grey lighten-1">mdi-information</v-icon>
+                </v-btn> -->
+              </v-list-item-action>
+            </v-list-item>
+
+            <!-- <v-list-item
+              v-for="c in item.child"
+              :key="c.title"
+              :to="c.link"
+            >
+              <v-list-item-title>{{ c.title }}</v-list-item-title>
+            </v-list-item> -->
+          </v-list>
+          </v-menu>
+
+        </template>
       </v-toolbar-items>
 
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawerAct"></v-app-bar-nav-icon>
-      
-      <!-- <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
+    
+      <!-- <v-btn icon class="hidden-sm-and-down">
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn> -->
 
@@ -42,7 +78,7 @@
       temporary
       right
     >
-      <v-list-item>
+      <!-- <v-list-item>
         <v-list-item-avatar>
           <v-img src="https://scontent-sin6-1.xx.fbcdn.net/v/t31.0-8/21368711_1501046613320872_5803188875072513101_o.png?_nc_cat=100&_nc_oc=AQmcghKOkNteC68MZyQB-6b0Csdd0pM_tlM5QMHnaMiHUZu-bWk-vQNfQVx2T6es4Sw&_nc_ht=scontent-sin6-1.xx&oh=3ab4f0077df6abead587bb8cb99e8b55&oe=5E41A5CB"
           transition="scale-transition"></v-img>
@@ -51,7 +87,7 @@
         <v-list-item-content>
           <v-list-item-title>Multimedia FIT</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <v-divider></v-divider>
 
@@ -82,11 +118,13 @@ export default {
         lastScrollPosition: 0,
         activeBtn: 1,
         items: [
-          { title: 'Home', icon: 'mdi-home', link: '/' },
-          // { title: 'About', icon: 'mdi-account', link: '/about' },
-          // { title: 'Product', icon: 'mdi-launch', link: '/product' },
-          // { title: 'Activity', icon: 'mdi-timelapse', link: '/activity' },
-          { title: 'Peminjaman', icon: 'mdi-timelapse', link: '/peminjaman' }
+          { title: 'Beranda', icon: 'mdi-home', link: '/', child: [] },
+          { title: 'Tentang', icon: 'mdi-account', link: '/about', child: [
+            { title: 'Laboratorium', subtitle: 'Tentang Lab Multimedia', icon: 'mdi-rocket', link: '/about' },
+            { title: 'Produk', subtitle: 'Produk Lab Multimedia', icon: 'mdi-launch', link: '/product' },
+            { title: 'Aktivitas', subtitle: 'Aktivitas Lab Multimedia', icon: 'mdi-timelapse', link: '/activity' }
+          ] },
+          { title: 'Peminjaman', icon: 'mdi-equal-box', link: '/peminjaman', child: [] }
         ],
     }),
     computed: {
@@ -133,7 +171,8 @@ export default {
       transition: 0.3s ease-out !important;
     }
     .appbar.colored {
-      -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+      // -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2) !important;
+      -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 0px -1px rgba(0,0,0,0.1), 0 1px 4px 0 rgba(0,0,0,0.1) !important;
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 0px -1px rgba(0,0,0,0.1), 0 1px 4px 0 rgba(0,0,0,0.1) !important;
     }
 </style>

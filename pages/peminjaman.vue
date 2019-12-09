@@ -3,19 +3,8 @@
         <v-container grid-list-xs style="margin-top: -135px">
         <v-layout row wrap justify-center>
 
-            <v-flex xs12 lg12 xl3 class="hidden-lg-and-down" style="margin-top: 135px">
-                <v-card flat style="background: transparent !important">
-                    <!-- <v-card-title primary-title>
-                        Ayo cari barang yang<br/>ingin kamu pinjam
-                    </v-card-title> -->
-                    <v-card-text>
-                        <v-img width="100%" :src="require('~/assets/superhero-2.svg')"/>
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-
-            <v-flex xs12 lg10 xl6>
-            <v-card class="pa-5" outlined>
+            <v-flex xs12 lg9 xl6>
+            <v-card class="pa-0 pa-md-5" outlined>
                 <v-card-title primary-title>
                     Info Peminjaman
                 </v-card-title>
@@ -35,16 +24,9 @@
 
                     <v-text-field
                         v-model="nim"
+                        type="number"
                         label="NIM/NIP"
                         :rules="[v => !!v || 'NIM/NIP tidak boleh kosong']"
-                        required
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="email"
-                        label="E-mail"
-                        type="email"
-                        :rules="[v => !!v || 'Email tidak boleh kosong']"
                         required
                     ></v-text-field>
 
@@ -59,14 +41,6 @@
                         chips
                         return-object
                     ></v-select>
-
-                    <!-- <v-textarea
-                        v-model="catatan"
-                        label="Catatan"
-                        rows="2"
-                        auto-grow
-                        counter="40"
-                    ></v-textarea> -->
 
                     <v-flex xs12 lg12>
                         <v-layout row wrap>
@@ -95,6 +69,7 @@
                                                 tile
                                                 size="75"
                                                 color="grey"
+                                                class="hidden-sm-and-down"
                                             ></v-list-item-avatar>
                                         </v-list-item>
 
@@ -131,6 +106,10 @@
                         </v-layout>
                     </v-flex>
 
+                    <br>
+                    <v-divider></v-divider>
+                    <br>
+                    
                     <v-select
                     :class="listBarang.length != 0 ? 'mt-4' : ''"
                     v-model="durasi"
@@ -138,34 +117,14 @@
                     label="Durasi / Lama Pinjam"
                     ></v-select>
 
-                    <!-- <v-slider
-                        v-model="durasi"
-                        thumb-label="always"
-                        ticks="always"
-                        tick-size="6"
-                        persistent-hint
-                        step="1"
-                        :max="maxDurasi"
-                        min="1"
-                        hint="Min 1 hari"
-                    >
-                        <template v-slot:prepend>
-                            <p>Durasi Pinjam</p>
-                        </template>
-                        <template v-slot:append>
-                            <v-text-field
-                                v-model="durasi"
-                                class="mt-0 pt-0"
-                                hide-details
-                                single-line
-                                type="number"
-                                style="width: 60px"
-                                :max="maxDurasi"
-                                min="1"
-                            ></v-text-field>
-                            <p>Hari</p>
-                        </template>
-                    </v-slider> -->
+                    <v-textarea
+                        v-model="catatan"
+                        label="Catatan"
+                        rows="2"
+                        auto-grow
+                        counter="40"
+                        maxlength="40"
+                    ></v-textarea>
 
                     <br/>
 
@@ -182,32 +141,15 @@
                 </v-card-text>
             </v-card>
             </v-flex>
-
-            <v-flex xs12 lg12 xl3 class="hidden-lg-and-down" style="margin-top: 135px">
-                <v-card flat style="background: transparent !important">
-                    <!-- <v-card-title primary-title>
-                        Ayo cari barang yang<br/>ingin kamu pinjam
-                    </v-card-title> -->
-                    <v-card-text>
-                        <v-img width="100%" :src="require('~/assets/superhero.svg')"/>
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-
-            <br>
-
-            <v-flex xs12 xl8>  
-                <pre>{{ dataObj }}</pre>
-            </v-flex>
-
+            
         </v-layout>
         </v-container>
     </div>
 </template>
 
 <script>
-// import api from '@/plugins/api.js'
-// import Axios from '@/plugins/axios.js'
+import axios from 'axios'
+const bash = "https://multimedia-site.herokuapp.com"
 
 export default {
      data: () => ({
@@ -216,7 +158,7 @@ export default {
       nim: '',
       email: '',
       catatan: '',
-      maxDurasi: 5,
+      maxDurasi: 3,
       durasi: 1,
       listBarang: [],
       items: [
@@ -266,6 +208,7 @@ export default {
                     user: {
                         namaPeminjam: this.name,
                         nimPeminjam: this.nim,
+                        emailPeminjam: this.email
                     },
                     listBarang: [],
                     lamaMeminjam: parseInt(this.durasi.split(" ")[0])
@@ -278,6 +221,7 @@ export default {
                 })
                 if (dataObj.listBarang.length > 0) {
                     this.dataObj = dataObj
+                    this.peminjamanAct(dataObj)
                     // var bodyFormData = new FormData();  
                     // bodyFormData.set('obj', dataObj)
                     // this.$store.commit('addPeminjaman',dataObj)
@@ -293,6 +237,21 @@ export default {
         resetValidation () {
             this.$refs.form.resetValidation()
         },
+        peminjamanAct(req) {
+            const vm = this
+            const url = vm.$store.state.url
+            axios({
+                method: 'post',
+                url: bash+"/api/peminjaman",
+                data: {
+                    detailData: req
+                }
+            }).then(res=>{
+                alert("Berhasil meminjam, silahkan konfirmasi onsite di Lab Multimedia FIT yaa..")
+            }).catch(err=>{
+                alert("Gagal meminjam")
+            })
+        }
     },
 }
 </script>

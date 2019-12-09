@@ -1,8 +1,8 @@
 <template>
     <v-container grid-list-xs>
-        <cardView imgPosition="left" title="Our Product" subtitle="Product Multimedia Research Laboratory" tag="" link="/product" image="https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-2.jpg"/>
-        <cardView imgPosition="right" title="Our Activity" subtitle="Activity Multimedia Research Laboratory" tag="" link="/activity" image="https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-5.jpg"/>
-        <cardView imgPosition="left" title="Peminjaman barang" subtitle="" tag="" link="/peminjaman" image="https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-1.jpg"/>
+        <cardView imgPosition="left" title="Produk Lab" subtitle="Produk Multimedia Research Laboratory" tag="#1" link="/product" :image="['https://images.unsplash.com/photo-1495510096779-5fbe73258c83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80', 'https://images.unsplash.com/photo-1488376986648-2512dfc6f736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80']"/>
+        <cardView imgPosition="right" title="Aktivitas Lab" subtitle="Aktivitas Multimedia Research Laboratory" tag="#2" link="/activity" :image="['https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80']"/>
+        <cardView imgPosition="left" title="Peminjaman barang" subtitle="Peminjaman Barang Multimedia" tag="#3" link="/peminjaman" :image="['https://images.unsplash.com/photo-1486611367184-17759508999c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=966&q=80']"/>
     </v-container>
 </template>
 <script>

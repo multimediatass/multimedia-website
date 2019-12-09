@@ -2,7 +2,7 @@
 <v-app>
     <navBar/>
     <Header :fullHeight="fullHeight" :title="title" :subtitle="subtitle"/>
-    <v-content style="margin-bottom: 100px; background: #ffffff !important;">
+    <v-content style="background: #ffffff !important;" class="py-0 py-md-5">
         <nuxt />
     </v-content>
     <Footer/>
@@ -20,18 +20,6 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
@@ -71,8 +59,14 @@ export default {
         return store.index.fullHeight
       }else if (this.$route.name=="peminjaman") {
         return store.peminjaman.fullHeight
-      }else {
-        
+      }else if (this.$route.name=="about") {
+        return store.about.fullHeight
+      }else if (this.$route.name=="product") {
+        return store.product.fullHeight
+      }else if (this.$route.name=="activity") {
+        return store.activity.fullHeight
+      }else if (this.$route.name=="admin_panel"){
+        return store.admin.fullHeight
       }
     },
     title(){
@@ -81,8 +75,14 @@ export default {
         return store.index.title
       }else if (this.$route.name=="peminjaman") {
         return store.peminjaman.title
-      }else {
-        
+      }else if (this.$route.name=="about") {
+        return store.about.title
+      }else if (this.$route.name=="product") {
+        return store.product.title
+      }else if (this.$route.name=="activity") {
+        return store.activity.title
+      }else if (this.$route.name=="admin_panel"){
+        return store.admin.title
       }
     },
     subtitle(){
@@ -91,8 +91,14 @@ export default {
         return store.index.subtitle
       }else if (this.$route.name=="peminjaman") {
         return store.peminjaman.subtitle
-      }else {
-        
+      }else if (this.$route.name=="about") {
+        return store.about.subtitle
+      }else if (this.$route.name=="product") {
+        return store.product.subtitle
+      }else if (this.$route.name=="activity") {
+        return store.activity.subtitle
+      }else if (this.$route.name=="admin_panel"){
+        return store.admin.subtitle
       }
     }
   },

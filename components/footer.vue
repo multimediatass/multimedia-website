@@ -1,12 +1,37 @@
 <template>
-<div class="wave" v-if="this.$route.name == 'index'">
+<!-- <div class="wave" v-if="this.$route.name == 'index'">
   <span class='hero__wave_top'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Layer_1' x='0px' y='0px' viewBox='0 0 1920 204.8' style='enable-background:new 0 0 1920 204.8;' xml:space='preserve' preserveAspectRatio='none' class='svg hero__wave--svg replaced-svg'><style type='text/css'>.st1{fill:#0d0751;}</style><path class='st1' d='M367,41.4c235-43.3,518-74.9,736.8,23.9c121.4,54.9,250.6,103.2,395.6,103.2c116.1,0,242.4-31,383.1-114.4  c13.4-7.9,25.9-15.3,37.5-22.2v173H0l0-172C0,32.8,132,84.6,367,41.4z'></path></svg></span>
-</div>
+</div> -->
+
+<v-footer>
+<v-container grid-list-xs>
+  <v-row>
+    <v-col cols="12" sm="12" md="6" lg="8">
+      <!-- <strong class="subheading">labmultimedia@tass.telkomuniversity.ac.id</strong> -->
+    </v-col>
+    <v-col cols="12" sm="12" md="6" lg="4">
+      <!-- <v-img
+        :src="require('@/assets/logo_mulmed.png')"
+        :lazy-src="require('@/assets/logo_mulmed.png')"
+        width="100%"
+      ></v-img> -->
+    </v-col>
+  </v-row>
+
+</v-container>
+</v-footer>
+
 </template>
 <script>
 export default {
     data: ()=>({
-       
+       icons: [
+          'fab fa-facebook',
+          'fab fa-twitter',
+          'fab fa-google-plus',
+          'fab fa-linkedin',
+          'fab fa-instagram',
+        ],
     })
 }
 </script>

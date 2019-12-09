@@ -69,7 +69,7 @@ async function start () {
       res.json(err)
     })
   })
-  app.get('/api/logout', async(req, res, next)=>{
+  app.get('/api/signout', async(req, res, next)=>{
     auth.signOut().then(result=>{
       res.redirect('/')
     })
@@ -82,6 +82,26 @@ async function start () {
         res.redirect('/login')
       }
    });
+  })
+  app.get('/api/peminjaman', async(req, res, next)=>{
+    firestore.collection('peminjaman').get().then(docs=>{
+      const data = []
+      docs.forEach(doc=>{
+        data.push(doc.data())
+      })
+      res.json(data)
+    })
+  })
+  app.post('/api/peminjaman', async(req, res, next)=>{
+    firestore.collection('peminjaman').add({
+      user: req.body.detailData.user,
+      listBarang: req.body.detailData.listBarang,
+      lamaPinjam: req.body.detailData.lamaMeminjam
+    }).then(result=>{
+      res.json(result)
+    }).catch(err=>{
+      res.json(err)
+    })
   })
 
   app.use(nuxt.render)
