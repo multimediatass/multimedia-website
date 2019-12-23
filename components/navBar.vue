@@ -12,7 +12,7 @@
       :class="[transparentNav ? '' : 'colored']"
     >
       
-      <v-toolbar-title>Multimedia</v-toolbar-title>
+      <v-toolbar-title>{{this.$route.path}}</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -94,7 +94,7 @@
       <v-list dense>
 
         <v-list-item
-          v-for="item in items"
+          v-for="item in drawerItems"
           :key="item.title"
           :to="item.link"
         >
@@ -120,19 +120,32 @@ export default {
         items: [
           { title: 'Beranda', icon: 'mdi-home', link: '/', child: [] },
           { title: 'Tentang', icon: 'mdi-account', link: '/about', child: [
-            { title: 'Laboratorium', subtitle: 'Tentang Lab Multimedia', icon: 'mdi-rocket', link: '/about' },
-            { title: 'Produk', subtitle: 'Produk Lab Multimedia', icon: 'mdi-launch', link: '/product' },
-            { title: 'Aktivitas', subtitle: 'Aktivitas Lab Multimedia', icon: 'mdi-timelapse', link: '/activity' }
+            { title: 'Laboratorium', subtitle: 'Tentang Lab Multimedia', icon: 'mdi-rocket', link: '/profil' },
+            { title: 'Produk', subtitle: 'Produk Lab Multimedia', icon: 'mdi-launch', link: '/produk' },
+            { title: 'Aktivitas', subtitle: 'Aktivitas Lab Multimedia', icon: 'mdi-timelapse', link: '/aktivitas' }
           ] },
           { title: 'Peminjaman', icon: 'mdi-equal-box', link: '/peminjaman', child: [] }
-        ],
+        ]
     }),
     computed: {
+      drawerItems() {
+        let data = []
+        this.items.forEach(item=>{
+          if (item.child.length == 0) {
+            data.push(item)
+          }else {
+            item.child.forEach(c=>{
+              data.push(c)
+            })
+          }
+        })
+        return data
+      },
       colorNav() {
         if (this.transparentNav == true) {
           return "transparent"
         }else {
-          return "#0d0751"
+          return "#180cac"
         }
       }
     },
@@ -150,6 +163,7 @@ export default {
             }else {
                 this.transparentNav = false;
             }
+
             // this.showNavbar = currentScrollPosition < this.lastScrollPosition
             // this.lastScrollPosition = currentScrollPosition
         },
@@ -172,7 +186,9 @@ export default {
     }
     .appbar.colored {
       // -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2) !important;
-      -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 0px -1px rgba(0,0,0,0.1), 0 1px 4px 0 rgba(0,0,0,0.1) !important;
-      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 0px -1px rgba(0,0,0,0.1), 0 1px 4px 0 rgba(0,0,0,0.1) !important;
+      // -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 0px -1px rgba(0,0,0,0.1), 0 1px 4px 0 rgba(0,0,0,0.1) !important;
+      // box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 0px -1px rgba(0,0,0,0.1), 0 1px 4px 0 rgba(0,0,0,0.1) !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,.1) !important;
+      -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.1) !important;
     }
 </style>

@@ -1,8 +1,9 @@
 <template>
-    <div id="header" :class="[fullHeight ? 'fullHeight' : '', title=='Admin Panel' ? 'hide' : '']">
+    <div id="header" :class="[fullHeight ? 'fullHeight' : '', title==null ? 'hide' : '']">
+      <div class="contentHeader">
       <template v-if="fullHeight != true">
-        <h1 class="display-1 font-weight-bold">{{title}}</h1>
-        <p class="subtitle">{{subtitle}}</p>
+          <h1 class="display-1 font-weight-bold">{{title}}</h1>
+          <p class="subtitle">{{subtitle}}</p>
       </template>
       <template v-else>
         <h1 class="display-1 font-weight-bold">{{title}}</h1>
@@ -17,8 +18,16 @@
           </div>
         </div> -->
       </template>
+      </div>
+      <!-- <video autoplay muted loop id="videoBackground">
+        <source :src="vid" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video> -->
       <!-- <span v-if="fullHeight == true" class='hero__wave'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Layer_1' x='0px' y='0px' viewBox='0 0 1920 204.8' style='enable-background:new 0 0 1920 204.8;' xml:space='preserve' preserveAspectRatio='none' class='svg hero__wave--svg replaced-svg'><style type='text/css'>.st0{fill:#FFFFFF;}</style><path class='st0' d='M367,41.4c235-43.3,518-74.9,736.8,23.9c121.4,54.9,250.6,103.2,395.6,103.2c116.1,0,242.4-31,383.1-114.4  c13.4-7.9,25.9-15.3,37.5-22.2v173H0l0-172C0,32.8,132,84.6,367,41.4z'></path></svg></span> -->
       <!-- <span v-if="fullHeight == true" class='hero__wave'><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 1920 242.6" style="enable-background:new 0 0 1920 242.6;" xml:space="preserve" class="svg replaced-svg"><style type="text/css">.st0{fill:#FFFFFF;}.st1{fill:none;}</style><path class="st0" d="M1920,70.5v172.1H0v-27.9C171.3,122.8,367.9,89,589.6,113.4C923.1,149.9,1014.7,43,1239.7,7  c224.9-35.9,442.2,77.7,576.1,75.6C1853.2,82,1888,78,1920,70.5z"></path><rect x="-1036" y="-829.4" class="st1" width="1920" height="137.6"></rect><rect x="-1136" y="-829.4" class="st1" width="2446" height="380"></rect></svg></span> -->
+      <!-- <span class="hero__wave">
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><style>.cls-1{fill:#fff;}</style></defs><polygon class="cls-1" points="-261 1063 2027 625 2027 1179 -261 1179 -261 1063"/></svg>
+      </span> -->
       <!-- <span v-if="fullHeight == true" class='hero__wave'><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 1920 397" style="enable-background:new 0 0 1920 397;" xml:space="preserve" class="svg replaced-svg"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}</style><path class="st0" d="M1920,0v397H0V64.4c109.8,226.9,368.5,351.3,621,283.7L1920,0z"></path></svg></span> -->
       <!-- <span v-if="fullHeight == true" class="hero__wave"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 2353.6 1112.5" style="enable-background:new 0 0 2353.6 1112.5;" xml:space="preserve" class="svg replaced-svg"><style type="text/css">.st0{fill:#FFFFFF;}</style><path class="st0" d="M2353.6,0v1112.5H0c132.1-171.4,350.7-231.4,655.9-179.9c474,79.9,637.1-23.3,882.7-262.4  C1802.7,413,1870,54.1,2353.6,0z"></path></svg></span> -->
       <!-- <span v-if="fullHeight == true" class="hero__wave"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 589" class="svg replaced-svg">
@@ -33,7 +42,7 @@
             <polygon fill="#FFF" points="6 592 6 578.789 1929 69 1928 592"></polygon>
           </g>
         </svg>
-      </span> -->
+      </span> -->    
     </div>
 </template>
 <script>
@@ -93,4 +102,11 @@ svg:not(:root) {
 
 svg {
   display: block; }
+
+#videoBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
 </style>

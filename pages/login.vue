@@ -36,7 +36,7 @@
                         class="mr-4"
                         @click="signin"
                     >
-                        Signin
+                        Login
                     </v-btn>
 
                 </v-card-text>
@@ -49,8 +49,8 @@
 </template>
 <script>
 import axios from 'axios'
-// const bash = "https://multimedia-site.herokuapp.com"
-const bash = "http://localhost:3000"
+const bash = "https://multimedia-site.herokuapp.com"
+// const bash = "http://localhost:3000"
 
 export default {
     data:()=>({

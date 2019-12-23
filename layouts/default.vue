@@ -2,7 +2,7 @@
 <v-app>
     <navBar/>
     <Header :fullHeight="fullHeight" :title="title" :subtitle="subtitle"/>
-    <v-content style="background: #ffffff !important;" class="py-0 py-md-5">
+    <v-content style="background: #ffffff !important;" class="py-0">
         <nuxt />
     </v-content>
     <Footer/>
@@ -59,14 +59,16 @@ export default {
         return store.index.fullHeight
       }else if (this.$route.name=="peminjaman") {
         return store.peminjaman.fullHeight
-      }else if (this.$route.name=="about") {
+      }else if (this.$route.name=="profil") {
         return store.about.fullHeight
-      }else if (this.$route.name=="product") {
+      }else if (this.$route.name=="produk") {
         return store.product.fullHeight
-      }else if (this.$route.name=="activity") {
+      }else if (this.$route.name=="aktivitas") {
         return store.activity.fullHeight
       }else if (this.$route.name=="admin_panel"){
         return store.admin.fullHeight
+      }else if (this.$route.name=="login") {
+        return store.login.fullHeight
       }
     },
     title(){
@@ -75,14 +77,16 @@ export default {
         return store.index.title
       }else if (this.$route.name=="peminjaman") {
         return store.peminjaman.title
-      }else if (this.$route.name=="about") {
+      }else if (this.$route.name=="profil") {
         return store.about.title
-      }else if (this.$route.name=="product") {
+      }else if (this.$route.name=="produk") {
         return store.product.title
-      }else if (this.$route.name=="activity") {
+      }else if (this.$route.name=="aktivitas") {
         return store.activity.title
-      }else if (this.$route.name=="admin_panel"){
+      }else if (this.$route.name=="admin_panel") {
         return store.admin.title
+      }else if (this.$route.name=="login") {
+        return store.login.title
       }
     },
     subtitle(){
@@ -91,14 +95,16 @@ export default {
         return store.index.subtitle
       }else if (this.$route.name=="peminjaman") {
         return store.peminjaman.subtitle
-      }else if (this.$route.name=="about") {
+      }else if (this.$route.name=="profil") {
         return store.about.subtitle
-      }else if (this.$route.name=="product") {
+      }else if (this.$route.name=="produk") {
         return store.product.subtitle
-      }else if (this.$route.name=="activity") {
+      }else if (this.$route.name=="aktivitas") {
         return store.activity.subtitle
       }else if (this.$route.name=="admin_panel"){
         return store.admin.subtitle
+      }else if (this.$route.name=="login") {
+        return store.login.subtitle
       }
     }
   },

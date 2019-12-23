@@ -45,6 +45,7 @@ async function start () {
   // Give nuxt middleware to express
   const axios = require('axios')
 
+  // API
   app.get('/api/users', async (req, res, next) => {
     firebase.firestore().collection('users').get().then(docs=>{
       docs.forEach(doc=>{
@@ -92,16 +93,70 @@ async function start () {
       res.json(data)
     })
   })
-  app.post('/api/peminjaman', async(req, res, next)=>{
-    firestore.collection('peminjaman').add({
-      user: req.body.detailData.user,
-      listBarang: req.body.detailData.listBarang,
-      lamaPinjam: req.body.detailData.lamaMeminjam
-    }).then(result=>{
-      res.json(result)
-    }).catch(err=>{
-      res.json(err)
+  app.get('/api/barang', async(req, res, next)=>{
+    firestore.collection('barang').where('stokBarang', '>', 0).get().then(docs=>{
+      const data = []
+      docs.forEach(doc=>{
+        data.push({id: doc.id, namaBarang: doc.data().namaBarang, stokBarang: doc.data().stokBarang, jumlah: 1})
+      })
+      res.json(data)
     })
+  })
+  app.get('/api/barang/all', async(req, res, next)=>{
+    firestore.collection('barang').get().then(docs=>{
+      const data = []
+      docs.forEach(doc=>{
+        data.push({id: doc.id, namaBarang: doc.data().namaBarang, stokBarang: doc.data().stokBarang, jumlah: 1})
+      })
+      res.json(data)
+    })
+  })
+  app.post('/api/peminjaman', async(req, res, next)=>{
+    let listBarang = req.body.detailData.listBarang
+    let check = []
+    let batch = firestore.batch()
+    let commit = false
+
+    listBarang.forEach(barang=>{
+      firestore.collection('barang').doc(barang.id).get().then(doc=>{
+        let stokLatest = doc.data().stokBarang - barang.jumlah
+        if (doc.exists && stokLatest >= 0) {
+          let sfRef = firestore.collection('barang').doc(barang.id);
+          batch.update(sfRef, {stokBarang: stokLatest});
+          check.push(stokLatest)
+        }
+      }).then(result=>{
+        if (check.length == listBarang.length) {
+          commit = true
+        }else {
+          commit = false
+        }
+      })
+    })
+  
+    setInterval(() => {
+      if (commit == true) {
+        commit = false
+        clearInterval(this)
+        batch.commit()
+        .then(result=>{
+          firestore.collection('peminjaman').add({
+            user: req.body.detailData.user,
+            listBarang: req.body.detailData.listBarang,
+            lamaPinjam: req.body.detailData.lamaMeminjam,
+            startDate: req.body.detailData.startDate,
+            endDate: req.body.detailData.endDate
+          }).then(result=>{
+            res.json(result)
+          }).catch(err=>{
+            res.json(err)
+          })
+        }).catch(err=>{
+          res.json(err)
+        })
+      }
+    }, 10);
+
   })
 
   app.use(nuxt.render)

@@ -1,14 +1,18 @@
 <template>
   <v-container grid-list-xs>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
+    <v-layout row wrap justify-center mt-5>
+      <v-flex mt-5 xs12 justify-center text-center column>
+        <h1 v-if="error.statusCode === 404">
+          {{ pageNotFound }}
+        </h1>
+        <h1 v-else>
+          {{ otherError }}
+        </h1>
+        <span>Kembali ke
+        <b><NuxtLink to="/">Beranda</NuxtLink></b>
+        </span>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -30,8 +34,8 @@ export default {
   },
   data () {
     return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
+      pageNotFound: 'Maaf, halaman tidak ditemukan',
+      otherError: 'Maaf, ada kesalahan pengaksesan'
     }
   }
 }

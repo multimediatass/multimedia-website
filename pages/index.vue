@@ -1,25 +1,36 @@
 <template>
+<div class="index">
     <v-container grid-list-xs>
-        <cardView imgPosition="left" title="Produk Lab" subtitle="Produk Multimedia Research Laboratory" tag="#1" link="/product" :image="['https://images.unsplash.com/photo-1495510096779-5fbe73258c83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80', 'https://images.unsplash.com/photo-1488376986648-2512dfc6f736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80']"/>
-        <cardView imgPosition="right" title="Aktivitas Lab" subtitle="Aktivitas Multimedia Research Laboratory" tag="#2" link="/activity" :image="['https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80']"/>
-        <cardView imgPosition="left" title="Peminjaman barang" subtitle="Peminjaman Barang Multimedia" tag="#3" link="/peminjaman" :image="['https://images.unsplash.com/photo-1486611367184-17759508999c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=966&q=80']"/>
+        <cardView imgPosition="left" title="Produk" subtitle="Produk Multimedia Research Laboratory" tag="#1" link="/produk" :image="['https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-2.jpg', 'https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-3.jpg']" media="images"/>
+        <cardView imgPosition="right" title="Aktivitas" subtitle="Aktivitas Multimedia Research Laboratory" tag="#2" link="/aktivitas" :image="['https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-5.jpg', 'https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-4.jpg']" media="images"/>
+        <cardView imgPosition="left" title="Peminjaman barang" subtitle="Peminjaman Barang Multimedia" tag="#3" link="/peminjaman" :image="['https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-1.jpg']" media="images"/>
+        <v-divider></v-divider>
+            <cardView imgPosition="center" title="Profil Multimedia" subtitle="Ketuk tombol dibawah, untuk melihat profil lab kami" tag="#Profil" link="/profil" :image="[]" media=""/>
+        <v-divider></v-divider>
     </v-container>
+</div>
 </template>
 <script>
-import cardView from '~/components/cardView.vue'
+import cardView from '@/components/cardView.vue'
 
 export default {
     components: {
-        cardView
+        cardView,
     },
     data(){
         return {
             username: '',
-            user: null
+            user: null,
+            isActive: false,
         }
     }
 }
 </script>
-<style>
-    
+<style lang="scss">
+    .index {
+        background: url('../assets/img/bg.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 </style>

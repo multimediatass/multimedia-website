@@ -6,8 +6,8 @@ const createStore = () => {
     state: {
       routeMeta: {
           index: {
-              title: "Multimedia Lab",
-              subtitle: "Fakultas Ilmu Terapan Tel-U",
+              title: "Multimedia",
+              subtitle: "Laboratory FIT Tel-U",
               fullHeight: true
           },
           peminjaman: {
@@ -16,11 +16,11 @@ const createStore = () => {
               fullHeight: false
           },
           about: {
-              title: 'Tentang',
+              title: 'Profil',
               subtitle: 'Multimedia Research Laboratory FIT',
               fullHeight: false
           },
-          product: {
+          product: {  
               title: 'Produk',
               subtitle: 'Multimedia Research Laboratory FIT',
               fullHeight: false
@@ -31,7 +31,7 @@ const createStore = () => {
               fullHeight: false
           },
           login: {
-              title: 'Login Admin',
+              title: '...',
               subtitle: 'Multimedia Research Laboratory FIT',
               fullHeight: false
           },
