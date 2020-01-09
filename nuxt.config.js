@@ -5,6 +5,12 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  env: {
+    CTF_SPACE_ID: "h2jtdzogt1e4",
+    CTF_CDA_ACCESS_TOKEN: "JXwJsry6ootCQP252r5nDKSQz7lJrBzWzk4m8K-fJhs",
+    CTF_PERSON_ID: "30pp716IrvINPXGQ9R3r94",
+    CTF_BLOG_POST_TYPE_ID: ""
+  },
   head: {
     title: 'Multimedia Laboratory',
     meta: [
@@ -27,6 +33,10 @@ module.exports = {
   css: [
     '@/assets/scss/main.scss'
   ],
+  layoutTransition: {
+    name: 'page',
+    mode: 'out-in'
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -46,10 +56,25 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     [
-      'vue-sweetalert2/nuxt',
+      'nuxt-fire',
       {
-        confirmButtonColor: '#41b882',
-        cancelButtonColor: '#ff7674'
+        config: {
+          apiKey: "AIzaSyAruiS-ZOiUOSYZP4q7xev9UMckcN8OA40",
+          authDomain: "rudyfoods-98.firebaseapp.com",
+          databaseURL: "https://rudyfoods-98.firebaseio.com",
+          projectId: "rudyfoods-98",
+          storageBucket: "rudyfoods-98.appspot.com",
+          messagingSenderId: "821510242303",
+          appId: "1:821510242303:web:f7ea6d2c74887eed9531ca"
+        },
+        services: {
+          firestore: {
+            static: false, // default
+            preload: false, // default
+            enablePersistence: true
+          },
+          auth: true
+        }
       }
     ]
   ],

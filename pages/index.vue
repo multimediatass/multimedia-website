@@ -1,12 +1,13 @@
 <template>
-<div class="index">
+<div class="bgSection">
     <v-container grid-list-xs>
-        <cardView imgPosition="left" title="Produk" subtitle="Produk Multimedia Research Laboratory" tag="#1" link="/produk" :image="['https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-2.jpg', 'https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-3.jpg']" media="images"/>
-        <cardView imgPosition="right" title="Aktivitas" subtitle="Aktivitas Multimedia Research Laboratory" tag="#2" link="/aktivitas" :image="['https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-5.jpg', 'https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-4.jpg']" media="images"/>
-        <cardView imgPosition="left" title="Peminjaman barang" subtitle="Peminjaman Barang Multimedia" tag="#3" link="/peminjaman" :image="['https://bunnycdn.com/assets//v2/images/homepage/bunnycdn-review-profile-1.jpg']" media="images"/>
+        <cardView imgPosition="left" title="Produk" subtitle="Produk Multimedia Research Laboratory" tag="#1" link="/produk" :image="[require('@/assets/img/svg/undraw_apps_m7mh.svg')]" media="images" :contain="true"/>
         <v-divider></v-divider>
-            <cardView imgPosition="center" title="Profil Multimedia" subtitle="Ketuk tombol dibawah, untuk melihat profil lab kami" tag="#Profil" link="/profil" :image="[]" media=""/>
+        <cardView imgPosition="right" title="Aktivitas" subtitle="Aktivitas Multimedia Research Laboratory" tag="#2" link="/aktivitas" :image="[require('@/assets/img/svg/undraw_fitting_piece_iilo.svg')]" media="images" :contain="true"/>
         <v-divider></v-divider>
+        <cardView imgPosition="left" title="Peminjaman barang" subtitle="Peminjaman Barang Multimedia" tag="#3" link="/peminjaman" :image="[require('@/assets/img/svg/undraw_abstract_x68e.svg')]" media="images" :contain="true"/>
+        <v-divider></v-divider>
+        <cardView imgPosition="center" title="Profil Multimedia" subtitle="Ketuk tombol dibawah, untuk melihat profil lab kami" tag="#Profil" link="/profil" :image="[]" media="" :contain="false"/>
     </v-container>
 </div>
 </template>
@@ -14,6 +15,9 @@
 import cardView from '@/components/cardView.vue'
 
 export default {
+    asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+        store.dispatch('setInfoPage', {titleInfo: 'Beranda', headerInfo: store.state.routeMeta.index})
+    },
     components: {
         cardView,
     },
@@ -27,10 +31,19 @@ export default {
 }
 </script>
 <style lang="scss">
-    .index {
-        background: url('../assets/img/bg.svg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
+    @media only screen and (min-width: 0) {
+        .bgSection {
+            background: #ffffff;
+        }
     }
+    @media only screen and (min-width: 1264px){
+        .bgSection {
+            background: url('../assets/img/bg2.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+
 </style>

@@ -11,8 +11,17 @@
       scroll-target="#header"
       :class="[transparentNav ? '' : 'colored']"
     >
-      
-      <v-toolbar-title>{{this.$route.path}}</v-toolbar-title>
+
+      <v-avatar
+        size="40"
+        color="indigo"
+        class="mr-2"
+        tile
+      >
+        <img :src="require('@/assets/img/logo/logo_mulmed2.png')" alt="alt">
+      </v-avatar>
+
+      <v-toolbar-title> / {{titlePage}}</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -22,7 +31,7 @@
           <v-btn v-if="item.child.length == 0" :key="item.title" small :to="item.link" text>{{item.title}}</v-btn>
           <v-menu v-else open-on-hover offset-y transition="slide-y-transition" bottom>
             <template v-slot:activator="{ on }">
-              <v-btn small text :key="item.title" v-on="on">{{item.title}}</v-btn>
+              <v-btn small text :key="item.title" v-on="on" :class="[childActive ? 'v-btn--active' : '']">{{item.title}}</v-btn>
             </template>
             <v-list>
 
@@ -128,6 +137,16 @@ export default {
         ]
     }),
     computed: {
+      childActive(){
+        if (this.$route.name == 'profil' || this.$route.name == 'produk' || this.$route.name == 'aktivitas') {
+          return true
+        }else {
+          return false
+        }
+      },
+      titlePage() {
+        return this.$store.state.titlePage
+      },
       drawerItems() {
         let data = []
         this.items.forEach(item=>{

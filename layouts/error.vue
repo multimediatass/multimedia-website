@@ -2,12 +2,6 @@
   <v-container grid-list-xs>
     <v-layout row wrap justify-center mt-5>
       <v-flex mt-5 xs12 justify-center text-center column>
-        <h1 v-if="error.statusCode === 404">
-          {{ pageNotFound }}
-        </h1>
-        <h1 v-else>
-          {{ otherError }}
-        </h1>
         <span>Kembali ke
         <b><NuxtLink to="/">Beranda</NuxtLink></b>
         </span>
@@ -25,6 +19,16 @@ export default {
       default: null
     }
   },
+  created() {
+    this.$store.commit('changeTitlePage', 'Error '+this.error.statusCode)
+    let titleErr = 'Error'
+    if (this.error.statusCode === 404) {
+      titleErr = this.pageNotFound
+    }else {
+      titleErr = this.otherError
+    }
+    this.$store.commit('changeHeaderInfo', {title: this.error.statusCode, subtitle: titleErr, fullHeight: false})
+  },
   head () {
     const title =
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError
@@ -34,8 +38,8 @@ export default {
   },
   data () {
     return {
-      pageNotFound: 'Maaf, halaman tidak ditemukan',
-      otherError: 'Maaf, ada kesalahan pengaksesan'
+      pageNotFound: 'Halaman tidak ditemukan',
+      otherError: 'Ada kesalahan akses'
     }
   }
 }

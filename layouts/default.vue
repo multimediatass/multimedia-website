@@ -1,11 +1,17 @@
 <template>
 <v-app>
     <navBar/>
-    <Header :fullHeight="fullHeight" :title="title" :subtitle="subtitle"/>
+    <Header/>
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
     <v-content style="background: #ffffff !important;" class="py-0">
         <nuxt />
     </v-content>
     <Footer/>
+    <back-to-top bottom="25px" right="25px">
+      <v-btn fab dark color="purple darken-2"><v-icon>mdi-chevron-up</v-icon></v-btn>
+    </back-to-top>
 </v-app>
 </template>
 
@@ -13,6 +19,7 @@
 import navBar from '~/components/navBar.vue'
 import Header from '~/components/header.vue'
 import Footer from '~/components/footer.vue'
+import BackToTop from 'vue-backtotop'
 
 export default {
   data () {
@@ -25,10 +32,16 @@ export default {
       rightDrawer: false,
     }
   },
+  computed: {
+    loading() {
+      return this.$store.state.loading
+    }
+  },
   components: {
     navBar,
     Header,
-    Footer
+    Footer,
+    BackToTop 
   },
   created() {
     function scrollToTop(scrollDuration) {
@@ -46,71 +59,11 @@ export default {
         window.requestAnimationFrame(step);
     }
     this.$router.beforeEach((to, from, next) => {
-      scrollToTop(200)
-      setTimeout(() => {
-        next()
-      }, 250);
+      scrollToTop(350)
+      next()
     });
-  },
-  computed: {
-    fullHeight(){
-      const store = this.$store.state.routeMeta
-      if (this.$route.name=="index") {
-        return store.index.fullHeight
-      }else if (this.$route.name=="peminjaman") {
-        return store.peminjaman.fullHeight
-      }else if (this.$route.name=="profil") {
-        return store.about.fullHeight
-      }else if (this.$route.name=="produk") {
-        return store.product.fullHeight
-      }else if (this.$route.name=="aktivitas") {
-        return store.activity.fullHeight
-      }else if (this.$route.name=="admin_panel"){
-        return store.admin.fullHeight
-      }else if (this.$route.name=="login") {
-        return store.login.fullHeight
-      }
-    },
-    title(){
-      const store = this.$store.state.routeMeta
-      if (this.$route.name=="index") {
-        return store.index.title
-      }else if (this.$route.name=="peminjaman") {
-        return store.peminjaman.title
-      }else if (this.$route.name=="profil") {
-        return store.about.title
-      }else if (this.$route.name=="produk") {
-        return store.product.title
-      }else if (this.$route.name=="aktivitas") {
-        return store.activity.title
-      }else if (this.$route.name=="admin_panel") {
-        return store.admin.title
-      }else if (this.$route.name=="login") {
-        return store.login.title
-      }
-    },
-    subtitle(){
-      const store = this.$store.state.routeMeta
-      if (this.$route.name=="index") {
-        return store.index.subtitle
-      }else if (this.$route.name=="peminjaman") {
-        return store.peminjaman.subtitle
-      }else if (this.$route.name=="profil") {
-        return store.about.subtitle
-      }else if (this.$route.name=="produk") {
-        return store.product.subtitle
-      }else if (this.$route.name=="aktivitas") {
-        return store.activity.subtitle
-      }else if (this.$route.name=="admin_panel"){
-        return store.admin.subtitle
-      }else if (this.$route.name=="login") {
-        return store.login.subtitle
-      }
-    }
-  },
-  mounted() {
-  },
-  methods: {
-  },
+  }
 }
 </script>
+<style lang="scss">
+</style>

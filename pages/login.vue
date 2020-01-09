@@ -49,10 +49,13 @@
 </template>
 <script>
 import axios from 'axios'
-const bash = "https://multimedia-site.herokuapp.com"
+// const bash = "https://multimedia-site.herokuapp.com"
 // const bash = "http://localhost:3000"
 
 export default {
+    asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+        store.dispatch('setInfoPage', {titleInfo: 'Login', headerInfo: store.state.routeMeta.login})
+    },
     data:()=>({
         email: '',
         password: '',
@@ -67,7 +70,8 @@ export default {
     methods: {
         signin() {
             const vm = this
-            const url = vm.$store.state.url
+            vm.$store.commit('setLoading', true)
+            const bash = vm.$store.state.url.bash
             vm.loading = true
             axios({
                 method: 'post',
@@ -88,6 +92,8 @@ export default {
                 }
             }).catch(err=>{
                 vm.loading = false
+            }).finally(end=>{
+                vm.$store.commit('setLoading', false)
             })
         }
     }

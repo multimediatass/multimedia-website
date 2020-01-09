@@ -6,9 +6,13 @@
         <v-flex mt-5 xs12 justify-center text-center column>
             <v-icon large :color="type">{{icon}}</v-icon>
             <h3>{{msg.title}}</h3>
-            <p>{{msg.subtitle}}</p>
-            <v-divider></v-divider>
-            <br>
+            <template v-if="msg.code">
+                <p>Catat ID Peminjaman anda: <br><b style="background: blue; padding: 3px 10px; color: #ffffff">{{msg.code}}</b></p>
+            </template>
+
+            <p v-html="msg.subtitle"></p>
+            
+            <br><v-divider></v-divider><br>
             <span>Kembali ke
             <b><router-link to="/">beranda</router-link></b>
             </span>

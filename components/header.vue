@@ -47,12 +47,7 @@
 </template>
 <script>
 export default {
-    props: {
-        fullHeight: Boolean,
-        title: String,
-        subtitle: String
-    },
-     data () {
+    data () {
       return {
         colors: [
           'green',
@@ -71,6 +66,17 @@ export default {
         ],
       }
     },
+    computed: {
+      title() {
+        return this.$store.state.headerInfo.title
+      },
+      subtitle() {
+        return this.$store.state.headerInfo.subtitle
+      },
+      fullHeight() {
+        return this.$store.state.headerInfo.fullHeight
+      }
+    }
 }
 </script>
 

@@ -3,12 +3,12 @@
     <div class="cardViewContainer">
     
     <template v-if="imgPosition == 'left'">
-        <div v-if="image.length != 0" class="contentImg">
+        <div v-if="image.length != 0" class="contentImg" :class="contain ? 'contain' : ''">
             <!-- <v-img
                 :src="image"
                 :lazy-src="image"
                 transition="fade-transition"
-                class="grey lighten-2"
+                class=""
             ></v-img> -->
 
             <v-carousel
@@ -18,7 +18,7 @@
                 :cycle="true"
                 :show-arrows="image.length > 1"
                 transition="fade-transition"
-                class="grey lighten-2 responsive-media shadowMedia"
+                class=" responsive-media shadowMedia"
             >
                 <v-carousel-item
                     v-for="(i, index) in image" :key="index"
@@ -50,12 +50,12 @@
             <p class="subtitleText">{{subtitle}}</p>
             <NuxtLink v-if="link != ''" :to="link" class="btnMore">Baca Selengkapnya</NuxtLink>
         </div>
-        <div v-if="image.length != 0" class="contentImg">
+        <div v-if="image.length != 0" class="contentImg" :class="contain ? 'contain' : ''">
             <!-- <v-img
                 :src="image"
                 :lazy-src="image"
                 transition="fade-transition"
-                class="grey lighten-2"
+                class=""
             ></v-img> -->
              <v-carousel
                 v-if="media == 'images'"
@@ -64,7 +64,7 @@
                 :cycle="true"
                 :show-arrows="image.length > 1"
                 transition="fade-transition"
-                class="grey lighten-2 responsive-media shadowMedia"
+                class=" responsive-media shadowMedia"
             >
                 <v-carousel-item
                     v-for="(i, index) in image" :key="index"
@@ -82,7 +82,7 @@
         </div>
     </template>
     <template v-else-if="imgPosition == 'socialMedia'">
-        <div v-if="image.length != 0" class="contentImg">
+        <div v-if="image.length != 0" class="contentImg" :class="contain ? 'contain' : ''">
             
         </div>
         <div class="contentText">
@@ -93,7 +93,7 @@
         </div>
     </template>
     <template v-else>
-        <div v-if="image.length != 0" class="contentImg full">
+        <div v-if="image.length != 0" class="contentImg full" :class="contain ? 'contain' : ''">
              <v-carousel
                 v-if="media == 'images'"
                 hide-delimiters
@@ -101,7 +101,7 @@
                 :cycle="true"
                 :show-arrows="image.length > 1"
                 transition="fade-transition"
-                class="grey lighten-2 responsive-media shadowMedia"
+                class=" responsive-media shadowMedia"
             >
                 <v-carousel-item
                     v-for="(i, index) in image" :key="index"
@@ -137,7 +137,8 @@ export default {
         image: Array,
         imgPosition: String,
         link: String,
-        tag: String
+        tag: String,
+        contain: Boolean
     },
     components: {
         plyr
@@ -200,5 +201,9 @@ export default {
     }
     .mediaPlayer {
         border-radius: 10px !important;
+
+        // *:not(.plyr__controls__item, .plyr__controls, .plyr__controls__item *) {
+        //     width: 100% !important;
+        // }
     }
 </style>

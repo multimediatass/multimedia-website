@@ -1,8 +1,8 @@
 <template>
-    <div class="index">
+    <div>
 
         <v-container grid-list-xs>
-            <cardView imgPosition="left" title="Multimedia" subtitle="Research Laboratory FIT" tag="#Profil" link='' :image="[require('@/assets/vid/1.mp4')]" media="video"/>
+            <cardView imgPosition="left" title="Multimedia" subtitle="Research Laboratory FIT" tag="#Profil" link='' :image="[require('@/assets/vid/1.mp4')]" media="video" :contain="true"/>
         </v-container>
 
         <!-- <v-row>
@@ -149,6 +149,13 @@ import cardView from '@/components/cardView'
 import plyr from 'vue-plyr'
 
 export default {
+    asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+        store.dispatch('setInfoPage', {titleInfo: 'Profil', headerInfo: store.state.routeMeta.profil})
+    },
+    // transition: {
+    //     name: 'xlide',
+    //     mode: 'out-in'
+    // },
     data: () => ({
         length: 3,
         window: 0,
