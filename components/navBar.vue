@@ -3,17 +3,17 @@
    <v-app-bar
       app
       flat
-      height="60"
       class="appbar px-0 px-md-12"
       :color="colorNav"
       dark
       elevate-on-scroll
       scroll-target="#header"
       :class="[transparentNav ? '' : 'colored']"
+      dense
     >
 
       <v-avatar
-        size="40"
+        size="35"
         color="indigo"
         class="mr-2"
         tile
@@ -21,7 +21,7 @@
         <img :src="require('@/assets/img/logo/logo_mulmed2.png')" alt="alt">
       </v-avatar>
 
-      <v-toolbar-title> / {{titlePage}}</v-toolbar-title>
+      <v-toolbar-title><v-btn small text :ripple="false" outlined>/{{titlePage}}</v-btn></v-toolbar-title>
 
       <v-spacer></v-spacer>
 

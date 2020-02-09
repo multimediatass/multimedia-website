@@ -7,11 +7,11 @@
 <v-divider></v-divider>
 <v-footer id="footer" class="px-0 mt-5">
   <div class="leftContent">
-    <v-flex sm12 row justify-center justify-md-start align-center wrap pa-2>
+    <v-flex sm12 :column="$vuetify.breakpoint.smAndUp" :row="$vuetify.breakpoint.mdAndUp" justify-center justify-md-start align-center wrap pa-2>
       <h4 class="subheading mx-3 my-3"><v-icon>mdi-email</v-icon> labmultimedia@tass.telkomuniversity.ac.id</h4>
-      /
+      <span v-if="$vuetify.breakpoint.mdAndUp">/</span>
       <h4 class="subheading mx-3 my-3"><v-icon>mdi-instagram</v-icon> <a href="https://www.instagram.com/multimediafit/" target="_blank">multimediafit</a></h4>
-      /
+      <span v-if="$vuetify.breakpoint.mdAndUp">/</span>
       <h4 class="subheading mx-3 my-3"><v-icon>mdi-youtube</v-icon> <a href="https://www.youtube.com/user/MultimediaFIT/" target="_blank">multimediafit</a></h4>
     </v-flex>
   </div>
