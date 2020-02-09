@@ -15,8 +15,7 @@
                     :cycle="true"
                     :show-arrows="person.fields.cover.length > 1"
                     transition="fade-transition"
-                    class="grey lighten-2"
-                    height="480"
+                    class="grey lighten-2 responsive-media-card full"
                 >
                     <v-carousel-item
                         v-for="(m, index) in person.fields.cover"
@@ -32,8 +31,7 @@
                 :src="require('@/assets/img/bg/404.png')"
                 :lazy-src="require('@/assets/img/bg/404.png')"
                 transition="fade-transition"
-                class="grey lighten-2"
-                height="480"
+                class="grey lighten-2 responsive-media-card"
                 >
                 <template v-slot:placeholder>
                     <v-row
@@ -69,7 +67,7 @@
                             :cycle="false"
                             :show-arrows="person.fields.media.length > 1"
                             transition="fade-transition"
-                            class="grey lighten-2"
+                            class="grey lighten-2 responsive-media-card"
                             height="300"
                             width="100%"
                             >
@@ -149,10 +147,5 @@ export default {
     components: {
         RichTextRenderer
     },
-    methods: {
-        cek(text){
-            console.log(text)
-        }
-    }
 }
 </script>

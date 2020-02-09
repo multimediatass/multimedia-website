@@ -15,8 +15,7 @@
                     :cycle="true"
                     :show-arrows="person.fields.cover.length > 1"
                     transition="fade-transition"
-                    class="grey lighten-2"
-                    height="480"
+                    class="grey lighten-2 responsive-media-card full"
                 >
                     <v-carousel-item
                         v-for="(m, index) in person.fields.cover"
@@ -32,8 +31,7 @@
                 :src="require('@/assets/img/bg/404.png')"
                 :lazy-src="require('@/assets/img/bg/404.png')"
                 transition="fade-transition"
-                class="grey lighten-2"
-                height="480"
+                class="grey lighten-2 responsive-media-card"
                 >
                 <template v-slot:placeholder>
                     <v-row
@@ -54,6 +52,40 @@
                     {{person.fields.description}}
                 </v-card-subtitle>
 
+                <v-divider></v-divider>
+
+                <v-card-text class="body-2" v-if="person.fields.content">
+                    <template v-if="person.fields.media">
+                        <v-card
+                            max-width="500"
+                            max-height="500"
+                            outlined
+                        >
+                            <v-carousel
+                            hide-delimiters
+                            :continuous="true"
+                            :cycle="false"
+                            :show-arrows="person.fields.media.length > 1"
+                            transition="fade-transition"
+                            class="grey lighten-2 responsive-media-card"
+                            height="300"
+                            width="100%"
+                            >
+                            <v-carousel-item
+                                v-for="(m, index) in person.fields.media"
+                                :key="index"
+                                :src="m.fields.file.url"
+                                :lazy-src="m.fields.file.url"
+                            >
+                            </v-carousel-item>
+                            </v-carousel>
+                        </v-card>
+                        <br><v-divider></v-divider><br>
+                    </template>
+
+                    <RichTextRenderer :document="person.fields.content"/>
+                </v-card-text>
+
                 <v-card-actions>
 
                 <v-spacer></v-spacer>
@@ -67,6 +99,7 @@
 </template>
 <script>
 import {createClient} from '~/plugins/contentful.js'
+import RichTextRenderer from 'contentful-rich-text-vue-renderer';
 const client = createClient()
 
 export default {
@@ -95,9 +128,12 @@ export default {
             }
         }).catch(console.error)
         .finally(end=>{
-            store.dispatch('setInfoPage', {titleInfo: data.fields.title, headerInfo: {title: data.fields.title, subtitle: '', fullHeight: false}})
+            store.dispatch('setInfoPage', {titleInfo: data.fields.title, headerInfo: {title: data.fields.title, subtitle: data.fields.description, fullHeight: false}})
             store.dispatch('setLoading', false)
         })
+    },
+    components: {
+        RichTextRenderer
     },
 }
 </script>
