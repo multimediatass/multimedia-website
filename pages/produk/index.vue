@@ -1,7 +1,7 @@
 <template>
     <v-container grid-list-xs>
 
-        <cardView imgPosition="left" title="Produk Lab" subtitle="Multimedia Research Laboratory FIT" tag="#produk" link='' :image="[require('@/assets/img/svg/undraw_apps_m7mh.svg')]" media="images" :contain="true"/>
+        <cardView imgPosition="left" title="Produk Lab" subtitle="Multimedia Research Laboratory FIT" tag="#produk" link='' :image="[require('@/assets/img/svg/undraw_buffer_wq43.svg')]" media="images" :contain="true"/>
         <v-layout row wrap v-if="posts.length != 0">
             <v-flex xs12 sm12 md6 lg6 xl4 v-for="(p, index) in posts" :key="p.fields.title + index" pa-0 py-2 pa-sm-2 pa-md-4>
             <v-card
