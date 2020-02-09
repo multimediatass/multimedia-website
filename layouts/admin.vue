@@ -92,6 +92,10 @@
       <nuxt />
     </v-content>
 
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+
   </v-app>
 </template>
 
@@ -106,6 +110,11 @@ export default {
       miniVariant: true,
       title: 'Admin Panel'
   }),
+  computed: {
+      loading() {
+        return this.$store.state.loading
+        }
+  },
   methods: {
     logout() {
         const vm = this

@@ -2,8 +2,8 @@
      <v-container grid-list-xs>
         
         <cardView imgPosition="left" title="Lab Mulmed FIT" subtitle="Ngapain aja sih?" tag="#aktivitas" link='' :image="[require('@/assets/img/svg/undraw_fitting_piece_iilo.svg')]" media="images" :contain="true"/>
-        <v-layout row wrap v-if="aktivitas.length != 0">
-            <v-flex xs12 sm12 md6 lg6 xl4 v-for="(p, index) in aktivitas" :key="p.idProduk + index" pa-0 py-2 pa-sm-2 pa-md-4>
+        <v-layout row wrap v-if="posts.length != 0">
+            <v-flex xs12 sm12 md6 lg6 xl4 v-for="(p, index) in posts" :key="p.fields.title + index" pa-0 py-2 pa-sm-2 pa-md-4>
             <v-card
                 class="mx-auto"
                 flat
@@ -11,19 +11,19 @@
                 style="border-bottom: 5px solid #2B2F8E !important"
             >
                 <v-carousel
-                    v-if="p.media.length != 0"
+                    v-if="p.fields.cover.length != 0"
                     hide-delimiters
                     :continuous="true"
                     :cycle="true"
-                    :show-arrows="p.media.length > 1"
+                    :show-arrows="p.fields.cover.length > 1"
                     transition="fade-transition"
                     class="grey lighten-2 responsive-media-card"
                 >
                     <v-carousel-item
-                        v-for="(m, index) in p.media"
+                        v-for="(m, index) in p.fields.cover"
                         :key="index"
-                        :src="m"
-                        :lazy-src="m"
+                        :src="m.fields.file.url"
+                        :lazy-src="m.fields.file.url"
                     >
                     </v-carousel-item>
                 </v-carousel>
@@ -47,18 +47,18 @@
                 </v-img>
 
                 <v-card-title>
-                    {{p.namaProduk}}
+                    {{p.fields.title}}
                 </v-card-title>
 
                 <v-card-subtitle>
-                    {{p.descProduk}}
+                    {{p.fields.description}}
                 </v-card-subtitle>
 
                 <v-card-actions>
                     <v-btn
                         color="purple"
                         text
-                        :to="`aktivitas/`+p.link"
+                        :to="`aktivitas/`+p.sys.id"
                     >
                         Baca Selengkapnya
                     </v-btn>
@@ -77,22 +77,39 @@
 <script>
 import notFound from '@/components/notFound'
 import cardView from '@/components/cardView'
+
+import {createClient} from '~/plugins/contentful.js'
+const client = createClient()
+
 export default {
     asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-        store.dispatch('setInfoPage', {titleInfo: "Aktivitas", headerInfo: store.state.routeMeta.aktivitas})
+        store.dispatch('setLoading', true)
+        return Promise.all([
+            // fetch the owner of the blog
+            client.getEntries({
+            'sys.id': ""
+            }),
+            // fetch all blog posts sorted by creation date
+            client.getEntries({
+            'content_type': "aktivitas",
+            order: '-sys.createdAt'
+            })
+        ]).then(([entries, posts]) => {
+            // return data that should be available
+            // in the template
+            return {
+                person: entries.items[0],
+                posts: posts.items
+            }
+        }).catch(console.error)
+        .finally(end=>{
+            store.dispatch('setInfoPage', {titleInfo: "Aktivitas", headerInfo: store.state.routeMeta.aktivitas})
+            store.dispatch('setLoading', false)
+        })
     },
     components: { 
         notFound,
         cardView
-    },
-    computed: {
-        aktivitas() {
-            let data = [
-                {idProduk: 'aktivitas_id', namaProduk: 'Aktivitas Name', descProduk: 'Ini Aktivitas Multimedia', media: [], link: 'aktivitas_1'},
-                {idProduk: 'aktivitas_id', namaProduk: 'Aktivitas Name', descProduk: 'Ini Aktivitas Multimedia', media: [], link: 'aktivitas_2'},
-            ]
-            return data
-        }
-    },
+    }
 }
 </script>

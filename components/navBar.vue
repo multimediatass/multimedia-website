@@ -133,7 +133,7 @@ export default {
             { title: 'Produk', subtitle: 'Produk Lab Multimedia', icon: 'mdi-launch', link: '/produk' },
             { title: 'Aktivitas', subtitle: 'Aktivitas Lab Multimedia', icon: 'mdi-timelapse', link: '/aktivitas' }
           ] },
-          { title: 'Peminjaman', icon: 'mdi-equal-box', link: '/peminjaman', child: [] }
+          // { title: 'Peminjaman', icon: 'mdi-equal-box', link: '/peminjaman', child: [] }
         ]
     }),
     computed: {

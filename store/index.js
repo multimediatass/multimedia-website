@@ -102,5 +102,27 @@ export const actions = {
       commit('setHistoryPeminjaman', arr)
       localStorage.setItem('historyPeminjaman', JSON.stringify(arr));
     }
+  },
+  async updateBarang({commit, state}, payload) {
+    commit('setLoading', true)
+    const ref = this.$fireStore.collection('barang').doc(payload.idBarang)
+    try {
+      await ref.update({
+        stokBarang: payload.newData
+      })
+    } catch (e) {
+      return Promise.reject(e)
+    }
+    commit('setLoading', false)
+  },
+  async deleteBarang({commit, state}, id) {
+    commit('setLoading', true)
+    const ref = this.$fireStore.collection('barang').doc(id)
+    try {
+      await ref.delete()
+    } catch (e) {
+      return Promise.reject(e)
+    }
+    commit('setLoading', false)
   }
 }

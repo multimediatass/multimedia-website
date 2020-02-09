@@ -3,10 +3,10 @@
     <v-container grid-list-xs>
         <cardView imgPosition="left" title="Produk" subtitle="Produk Multimedia Research Laboratory" tag="#1" link="/produk" :image="[require('@/assets/img/svg/undraw_apps_m7mh.svg')]" media="images" :contain="true"/>
         <v-divider></v-divider>
-        <cardView imgPosition="right" title="Aktivitas" subtitle="Aktivitas Multimedia Research Laboratory" tag="#2" link="/aktivitas" :image="[require('@/assets/img/svg/undraw_fitting_piece_iilo.svg')]" media="images" :contain="true"/>
+        <cardView imgPosition="left" title="Aktivitas" subtitle="Aktivitas Multimedia Research Laboratory" tag="#2" link="/aktivitas" :image="[require('@/assets/img/svg/undraw_fitting_piece_iilo.svg')]" media="images" :contain="true"/>
         <v-divider></v-divider>
-        <cardView imgPosition="left" title="Peminjaman barang" subtitle="Peminjaman Barang Multimedia" tag="#3" link="/peminjaman" :image="[require('@/assets/img/svg/undraw_abstract_x68e.svg')]" media="images" :contain="true"/>
-        <v-divider></v-divider>
+        <!-- <cardView imgPosition="left" title="Peminjaman barang" subtitle="Peminjaman Barang Multimedia" tag="#3" link="/peminjaman" :image="[require('@/assets/img/svg/undraw_abstract_x68e.svg')]" media="images" :contain="true"/>
+        <v-divider></v-divider> -->
         <cardView imgPosition="center" title="Profil Multimedia" subtitle="Ketuk tombol dibawah, untuk melihat profil lab kami" tag="#Profil" link="/profil" :image="[]" media="" :contain="false"/>
     </v-container>
 </div>

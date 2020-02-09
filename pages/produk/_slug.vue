@@ -9,16 +9,17 @@
                 style="border-bottom: 5px solid #2B2F8E !important"
             >
                 <v-carousel
-                    v-if="person.fields.media.length != 0"
+                    v-if="person.fields.cover.length != 0"
                     hide-delimiters
                     :continuous="true"
                     :cycle="true"
-                    :show-arrows="person.fields.media.length > 1"
+                    :show-arrows="person.fields.cover.length > 1"
                     transition="fade-transition"
-                    class="grey lighten-2 responsive-media-card"
+                    class="grey lighten-2"
+                    height="480"
                 >
                     <v-carousel-item
-                        v-for="(m, index) in person.fields.media"
+                        v-for="(m, index) in person.fields.cover"
                         :key="index"
                         :src="m.fields.file.url"
                         :lazy-src="m.fields.file.url"
@@ -31,7 +32,8 @@
                 :src="require('@/assets/img/bg/404.png')"
                 :lazy-src="require('@/assets/img/bg/404.png')"
                 transition="fade-transition"
-                class="grey lighten-2 responsive-media-card"
+                class="grey lighten-2"
+                height="480"
                 >
                 <template v-slot:placeholder>
                     <v-row

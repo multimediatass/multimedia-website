@@ -367,6 +367,10 @@
     }
 }
 
+.responsive-media-card.full {
+    height: 100% !important;
+}
+
 @media only screen and (min-width: 0) {
 .responsive-media-card {
     height: 250px !important;

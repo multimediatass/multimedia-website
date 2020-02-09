@@ -11,16 +11,16 @@
                 style="border-bottom: 5px solid #2B2F8E !important"
             >
                 <v-carousel
-                    v-if="p.fields.media.length != 0"
+                    v-if="p.fields.cover.length != 0"
                     hide-delimiters
                     :continuous="true"
                     :cycle="true"
-                    :show-arrows="p.fields.media.length > 1"
+                    :show-arrows="p.fields.cover.length > 1"
                     transition="fade-transition"
                     class="grey lighten-2 responsive-media-card"
                 >
                     <v-carousel-item
-                        v-for="(m, index) in p.fields.media"
+                        v-for="(m, index) in p.fields.cover"
                         :key="index"
                         :src="m.fields.file.url"
                         :lazy-src="m.fields.file.url"

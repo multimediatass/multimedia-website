@@ -1,7 +1,6 @@
 <template>
     <v-container grid-list-xs mt-5>
         <h1>Selamat datang</h1>
-        <br>
 
         <v-card flat outlined>
             <v-card-title>
@@ -25,21 +24,9 @@
                     <v-card-text>
                     <v-container>
                         <v-row>
-                        <!-- <v-col cols="12" sm="6" md="4">
-                            <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                        <v-col cols="12" sm="6" md="4" v-if="editedItem != null">
+                            <v-text-field v-model="stokEdit" label="Stok Barang"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                        </v-col> -->
                         </v-row>
                     </v-container>
                     </v-card-text>
@@ -47,7 +34,7 @@
                     <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                    <v-btn color="blue darken-1" text @click="save(editedItem.id, stokEdit)">Save</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -86,18 +73,8 @@
                         :search="search"
                     >
                         <template v-slot:item.action="{ item }">
-                        <v-icon
-                            small
-                            class="mr-2"
-                            @click="editItem(item)"
-                        >
-                            mdi-pencil
-                        </v-icon>
-                        <v-icon
-                            small
-                            @click="deleteItem(item)"
-                        >
-                            mdi-delete
+                        <v-icon small @click="cancelItem(item)">
+                            mdi-cancel
                         </v-icon>
                         </template>
                     </v-data-table>
@@ -108,23 +85,7 @@
                         :items="tableData"
                         :items-per-page="5"
                         :search="search"
-                    >
-                        <template v-slot:item.action="{ item }">
-                        <v-icon
-                            small
-                            class="mr-2"
-                            @click="editItem(item)"
-                        >
-                            mdi-pencil
-                        </v-icon>
-                        <v-icon
-                            small
-                            @click="deleteItem(item)"
-                        >
-                            mdi-delete
-                        </v-icon>
-                        </template>
-                    </v-data-table>
+                    ></v-data-table>
                 </template>
                 <template v-if="i == 3">
                     <v-data-table
@@ -157,7 +118,7 @@
     </v-container>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
     layout: 'admin',
@@ -165,11 +126,14 @@ export default {
         store.dispatch('setInfoPage', {titleInfo: 'Admin', headerInfo: store.state.routeMeta.admin})
     },
     created(){
+        this.loadPending();
         this.loadPeminjaman();
         this.loadBarang();
     },
     data() {
         return {
+            stokEdit: null,
+            editedItem: null,
             dialog: false,
             search: '',
             barang: null,
@@ -183,8 +147,7 @@ export default {
                 { text: 'List Barang', value: 'barang' },
                 { text: 'Lama Pinjam', value: 'lamaPinjam' },
                 { text: 'Waktu Pinjam', value: 'tanggalPinjam' },
-                { text: 'Waktu Pengembalian', value: 'tanggalPengembalian' },
-                { text: 'Actions', value: 'action', sortable: false }
+                { text: 'Waktu Pengembalian', value: 'tanggalPengembalian' }
             ],
             headersBarang: [
                 { text: 'Nama Barang', value: 'namaBarang' },
@@ -192,8 +155,12 @@ export default {
                 { text: 'Actions', value: 'action', sortable: false }
             ],
             headersPending: [
-                { text: 'ID Peminjaman', value: 'idPeminjaman' },
-                { text: 'Tgl Expired', value: 'expiredDate' },
+                { text: 'NIM', value: 'nim' },
+                { text: 'Nama', value: 'nama' },
+                { text: 'List Barang', value: 'barang' },
+                { text: 'Lama Pinjam', value: 'lamaPinjam' },
+                { text: 'Waktu Pinjam', value: 'tanggalPinjam' },
+                { text: 'Waktu Pengembalian', value: 'tanggalPengembalian' },
                 { text: 'Actions', value: 'action', sortable: false }
             ]
         }
@@ -232,6 +199,7 @@ export default {
             if (this.barang != null) {
                 this.barang.forEach(element=>{
                     data.push({
+                        id: element.id,
                         namaBarang: element.namaBarang,
                         stokBarang: element.stokBarang,
                     })
@@ -241,7 +209,22 @@ export default {
         },
         tableDataPending() {
             let data = []
-            data.push({idPeminjaman: '3123123', expiredDate: '03-01-2020'})
+            if (this.pending != null) {
+                this.pending.forEach(element=>{
+                    let barangString = ""
+                    element.listBarang.forEach(b=>{
+                        barangString += b.namaBarang+"("+b.jumlah+")" + " / "
+                    })
+                    data.push({
+                        nim: element.user.nimPeminjam,
+                        nama: element.user.namaPeminjam,
+                        barang: barangString,
+                        lamaPinjam: element.lamaPinjam + " Hari",
+                        tanggalPinjam: element.startDate,
+                        tanggalPengembalian: element.endDate,
+                    })
+                })
+            }
             return data
         },
         numberOfPages () {
@@ -252,15 +235,34 @@ export default {
         },
     },
     methods: {
-        refresh() {
-            this.loadPeminjaman();
-            this.loadBarang();
+        async refresh() {
+            this.$store.dispatch('setLoading', true)
+            await this.loadPeminjaman();
+            await this.loadBarang();
+            this.$store.dispatch('setLoading', false)
         },
         async loadBarang(){
             const vm = this
             const bash = vm.$store.state.url.bash
-            return axios.get(bash+"/api/barang/all").then((res) => {
+            return await this.$axios.get(bash+"/api/barang/all")
+            .then((res) => {
                 vm.barang = res.data.data
+            })
+        },
+        async loadPending() {
+            // const vm = this
+            // const bash = vm.$store.state.url.bash
+            // return await axios.get(bash+"/api/peminjaman/pending").then((res) => {
+            //     console.log(res.data)
+            //     vm.pending = res.data
+            // })
+            let data = []
+            const ref = await this.$fireStore.collection('peminjaman').where('confirmed','==',false).get().then(docs=>{
+                docs.forEach(doc=>{
+                    console.log(doc.data())
+                    data.push(doc.data())
+                })
+                this.pending = data
             })
         },
         async loadPeminjaman(){
@@ -270,7 +272,7 @@ export default {
             //     vm.peminjaman = res.data
             // })
             let data = []
-            const ref = this.$fireStore.collection('peminjaman').get().then(docs=>{
+            const ref = await this.$fireStore.collection('peminjaman').where('confirmed','==',true).get().then(docs=>{
                 docs.forEach(doc=>{
                     data.push(doc.data())
                 })
@@ -294,18 +296,28 @@ export default {
             })
         },
         editItem (item) {
-            console.log(item)
+            this.stokEdit = item.stokBarang
+            this.editedItem = item
             this.dialog = true
         },
-        deleteItem (item) {
-            confirm('Are you sure you want to delete this item?')
+        async save (id, newData) {
+            let obj = {
+                idBarang: id,
+                newData: parseInt(newData)
+            }
+            this.close()
+            await this.$store.dispatch('updateBarang', obj)
+            this.refresh()
+        },
+        cancelItem (item) {
+            console.log(item)
+        },
+        async deleteItem (item) {
+            await this.$store.dispatch('deleteBarang', item.id)
+            this.refresh()
         },
         close () {
             this.dialog = false
-        },
-
-        save () {
-            this.close()
         },
     }
 }

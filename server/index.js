@@ -97,8 +97,28 @@ async function start () {
       }
    });
   })
-  app.get('/api/peminjaman', async(req, res, next)=>{
+  app.get('/api/peminjaman/all', async(req, res, next)=>{
     firestore.collection('peminjaman').get().then(docs=>{
+      const data = []
+      docs.forEach(doc=>{
+        data.push(doc.data())
+      })
+      res.json(data)
+    })
+  })
+  app.get('/api/peminjaman/confirmed', async(req, res, next)=>{
+    firestore.collection('peminjaman').where('confirmed','==',true).get()
+    .then(docs=>{
+      const data = []
+      docs.forEach(doc=>{
+        data.push(doc.data())
+      })
+      res.json(data)
+    })
+  })
+  app.get('/api/peminjaman/pending', async(req, res, next)=>{
+    firestore.collection('peminjaman').where('confirmed','==',false).get()
+    .then(docs=>{
       const data = []
       docs.forEach(doc=>{
         data.push(doc.data())
@@ -175,7 +195,8 @@ async function start () {
             startDate: req.body.detailData.startDate,
             endDate: req.body.detailData.endDate,
             expiredAfter: req.body.detailData.expiredAfter,
-            catatan: req.body.detailData.catatan
+            catatan: req.body.detailData.catatan,
+            confirmed: false
           }).then(result=>{
             const obj = {id: result.id, expiredAfter: req.body.detailData.expiredAfter, submitAt: req.body.detailData.startDate}
             responseData(res, 200, obj);

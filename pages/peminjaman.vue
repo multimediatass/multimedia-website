@@ -263,6 +263,8 @@ import { required, email, maxLength, minLength, numeric } from 'vuelidate/lib/va
 
 export default {
     asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+        return redirect('/')
+        
         const bash = store.state.url.bash
         store.dispatch('setLoading', true)
 

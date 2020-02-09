@@ -6,9 +6,9 @@ module.exports = {
   ** Headers of the page
   */
   env: {
-    CTF_SPACE_ID: "h2jtdzogt1e4",
-    CTF_CDA_ACCESS_TOKEN: "JXwJsry6ootCQP252r5nDKSQz7lJrBzWzk4m8K-fJhs",
-    CTF_PERSON_ID: "30pp716IrvINPXGQ9R3r94",
+    CTF_SPACE_ID: "3k0xnhg46uck",
+    CTF_CDA_ACCESS_TOKEN: "tHYIEIk0fX0lpq7YcVjl1WG7fNsJyxKY9qa-UruFpAI",
+    CTF_PERSON_ID: "",
     CTF_BLOG_POST_TYPE_ID: ""
   },
   head: {
