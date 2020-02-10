@@ -58,7 +58,7 @@
                     <v-btn
                         color="purple"
                         text
-                        :to="`produk/`+p.sys.id"
+                        :to="`/produk/`+p.sys.id"
                     >
                         Baca Selengkapnya
                     </v-btn>

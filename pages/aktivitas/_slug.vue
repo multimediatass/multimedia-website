@@ -57,8 +57,8 @@
                 <v-card-text class="body-2" v-if="person.fields.content">
                     <template v-if="person.fields.media">
                         <v-card
-                            max-width="500"
-                            max-height="500"
+                            width="500"
+                            height="500"
                             outlined
                         >
                             <v-carousel
@@ -67,9 +67,9 @@
                             :cycle="false"
                             :show-arrows="person.fields.media.length > 1"
                             transition="fade-transition"
-                            class="grey lighten-2 responsive-media-card"
-                            height="300"
+                            class="grey lighten-2"
                             width="100%"
+                            height="100%"
                             >
                             <v-carousel-item
                                 v-for="(m, index) in person.fields.media"
