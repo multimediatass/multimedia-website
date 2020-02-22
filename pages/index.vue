@@ -32,7 +32,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap style="margin-top: 150px">
+        <v-layout row wrap style="margin-top: 150px; margin-bottom: 140px">
             <v-flex xs12 justify-center>
                 <div style="text-align: center">
                     <h1 class="display-1">OUR SKILL</h1>

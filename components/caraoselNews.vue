@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card flat outlined class="shadowCard radiusCard">
-        <v-carousel hide-delimiters height="100%" vertical :continuous="false">
+        <v-carousel hide-delimiters height="100%" :continuous="false">
             <v-carousel-item
                 v-for="d in news"
                 :key="d.title"
@@ -10,8 +10,8 @@
                 <v-layout row wrap fill-height justify-center>
                     <v-flex xs12 md5 justify-center align-self-center :order-xs2="media == 'right'">
                         <v-img
-                            :height="$vuetify.breakpoint.xs ? '100%' : 350"
-                            :contain="$vuetify.breakpoint.xs"
+                            height="100%"
+                            contain
                             :src="d.img[0].fields.file.url"
                             :lazy-src="d.img[0].fields.file.url"
                             transition="fade-transition"

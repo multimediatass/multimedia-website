@@ -1,6 +1,6 @@
 <template>
     <div>
-        <notFound msg="Pendaftaran belum dibuka, sabar dulu yaa.."/>        
+        <notFound msg="Pendaftaran belum dibuka, sabar dulu ya"/>        
     </div>
 </template>
 <script>
