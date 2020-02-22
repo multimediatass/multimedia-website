@@ -8,9 +8,9 @@ export const state = () => ({
   loading: null,
   routeMeta: {
       index: {
-          title: "Multimedia",
-          subtitle: "Laboratory FIT Tel-U",
-          fullHeight: false
+          title: "Multimedia Research",
+          subtitle: "Laboratory Tel-U",
+          fullHeight: true
       },
       peminjaman: {
           title: 'Peminjaman Barang',
@@ -41,7 +41,12 @@ export const state = () => ({
         title: 'Admin Panel',
         subtitle: 'Multimedia Research Laboratory FIT',
         fullHeight: false
-    }
+      },
+      join: {
+        title: 'Join',
+        subtitle: 'Multimedia Research Laboratory FIT',
+        fullHeight: false
+      }
   },
   url: {
     bash: 'http://localhost:3000',

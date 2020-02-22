@@ -51,7 +51,7 @@
                 </v-card-title>
 
                 <v-card-subtitle>
-                    {{p.fields.description}}
+                    {{p.fields.subtitle}}
                 </v-card-subtitle>
 
                 <v-card-actions>

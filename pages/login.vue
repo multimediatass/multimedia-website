@@ -62,11 +62,6 @@ export default {
         alert: {type: null, message: null},
         loading: null
     }),
-    // asyncData({ params, error }) {
-    //     return axios.get('http://localhost:3000/api/next-movie').then((res) => {
-    //         return { movie: res.data }
-    //     })
-    // },
     methods: {
         signin() {
             const vm = this
@@ -84,7 +79,7 @@ export default {
                 if (res.data.user != null) {
                     vm.alert.type = null
                     vm.alert.message = null
-                    vm.$router.push('/admin_panel')
+                    vm.$router.push('/admin')
                 }else {
                     vm.alert.type = "error"
                     vm.alert.message = res.data.message

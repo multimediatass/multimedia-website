@@ -8,7 +8,7 @@
                 outlined
                 style="border-bottom: 5px solid #2B2F8E !important"
             >
-                <v-carousel
+                <!-- <v-carousel
                     v-if="person.fields.cover.length != 0"
                     hide-delimiters
                     :continuous="true"
@@ -42,14 +42,14 @@
                     <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
                     </v-row>
                 </template>
-                </v-img>
+                </v-img> -->
 
                 <v-card-title class="title">
                     {{person.fields.title}}
                 </v-card-title>
 
                 <v-card-subtitle class="subtitle-1">
-                    {{person.fields.description}}
+                    {{person.fields.subtitle}}
                 </v-card-subtitle>
 
                 <v-divider></v-divider>
@@ -128,7 +128,7 @@ export default {
             }
         }).catch(console.error)
         .finally(end=>{
-            store.dispatch('setInfoPage', {titleInfo: data.fields.title, headerInfo: {title: data.fields.title, subtitle: data.fields.description, fullHeight: false}})
+            store.dispatch('setInfoPage', {titleInfo: data.fields.title, headerInfo: {title: data.fields.title, subtitle: data.fields.subtitle, fullHeight: false}})
             store.dispatch('setLoading', false)
         })
 

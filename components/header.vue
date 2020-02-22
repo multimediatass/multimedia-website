@@ -2,15 +2,16 @@
     <div id="header" :class="[fullHeight ? 'fullHeight' : '', title==null ? 'hide' : '']">
       <div class="contentHeader">
       <template v-if="fullHeight != true">
-          <h1 class="display-1 font-weight-bold">{{title}}</h1>
+          <h1 :class="[$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2']" class="font-weight-bold">{{title}}</h1>
           <p class="subtitle">{{subtitle}}</p>
       </template>
       <template v-else>
-        <h1 class="display-1 font-weight-bold">{{title}}</h1>
+        <h1 :class="[$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2']" class="font-weight-bold">{{title}}</h1>
         <p class="subtitle">{{subtitle}}</p>
+        <v-btn text icon color="white" large><v-icon>mdi-chevron-down</v-icon></v-btn>
         <!-- <div class="headerHalf">
           <div class="headerLeft">
-            <img :src="require('@/assets/standing.png')" alt="">
+            <img :src="require('@/assets/img/standing.png')" alt="">
           </div>
           <div class="headerRight">
             <h1>{{title}}</h1>
@@ -23,7 +24,7 @@
         <source :src="vid" type="video/mp4">
         Your browser does not support HTML5 video.
       </video> -->
-      <!-- <span v-if="fullHeight == true" class='hero__wave'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Layer_1' x='0px' y='0px' viewBox='0 0 1920 204.8' style='enable-background:new 0 0 1920 204.8;' xml:space='preserve' preserveAspectRatio='none' class='svg hero__wave--svg replaced-svg'><style type='text/css'>.st0{fill:#FFFFFF;}</style><path class='st0' d='M367,41.4c235-43.3,518-74.9,736.8,23.9c121.4,54.9,250.6,103.2,395.6,103.2c116.1,0,242.4-31,383.1-114.4  c13.4-7.9,25.9-15.3,37.5-22.2v173H0l0-172C0,32.8,132,84.6,367,41.4z'></path></svg></span> -->
+      <span v-if="fullHeight == true" class='hero__wave' style="box-shadow: 0 4px 10px rgba(0,0,0,.1) !important; -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.1) !important;"><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Layer_1' x='0px' y='0px' viewBox='0 0 1920 204.8' style='enable-background:new 0 0 1920 204.8;' xml:space='preserve' preserveAspectRatio='none' class='svg hero__wave--svg replaced-svg'><style type='text/css'>.st0{fill:#FFFFFF;}</style><path class='st0' d='M367,41.4c235-43.3,518-74.9,736.8,23.9c121.4,54.9,250.6,103.2,395.6,103.2c116.1,0,242.4-31,383.1-114.4  c13.4-7.9,25.9-15.3,37.5-22.2v173H0l0-172C0,32.8,132,84.6,367,41.4z'></path></svg></span>
       <!-- <span v-if="fullHeight == true" class='hero__wave'><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 1920 242.6" style="enable-background:new 0 0 1920 242.6;" xml:space="preserve" class="svg replaced-svg"><style type="text/css">.st0{fill:#FFFFFF;}.st1{fill:none;}</style><path class="st0" d="M1920,70.5v172.1H0v-27.9C171.3,122.8,367.9,89,589.6,113.4C923.1,149.9,1014.7,43,1239.7,7  c224.9-35.9,442.2,77.7,576.1,75.6C1853.2,82,1888,78,1920,70.5z"></path><rect x="-1036" y="-829.4" class="st1" width="1920" height="137.6"></rect><rect x="-1136" y="-829.4" class="st1" width="2446" height="380"></rect></svg></span> -->
       <!-- <span class="hero__wave">
         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><style>.cls-1{fill:#fff;}</style></defs><polygon class="cls-1" points="-261 1063 2027 625 2027 1179 -261 1179 -261 1063"/></svg>

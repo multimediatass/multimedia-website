@@ -43,15 +43,30 @@
     -webkit-font-smoothing: antialiased !important;
     text-shadow: 0 3px 5px rgba(0, 0, 0, 0.1) !important;
 }
-#header::after {
-    content: '';
-    opacity: 0.909;
-    background: linear-gradient(to bottom right, #180cac, #d054e4);
-    background-color: #2B2F8E;
-    width: 100%;
-    height: 100%;
-    position: absolute;
+
+.shadowCard {
+    -webkit-box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05) !important;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05) !important;
 }
+.radiusCard {
+    @media only screen and (min-width: 0) {
+        border-radius: 20px !important;
+    }
+
+    @media only screen and (min-width: 1264px){
+        border-radius: 40px !important;
+    }
+}
+
+// #header::after {
+//     content: '';
+//     opacity: 0.909;
+//     background: linear-gradient(to bottom right, #b22d30, #ed3237);
+//     background-color: #2B2F8E;
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+// }
 #header {
     overflow: hidden;
     font-family: "Quicksand", sans-serif;
@@ -74,8 +89,9 @@
     // background-image: url("../../assets/img/header.svg");
     // background-image: url("https://achan.id/images/austria.jpg");
     // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.6'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    background-image: url("../../assets/img/bg/science.png");
-    background-repeat: repeat;
+    background-image: url("../../assets/img/bg/header.jpg");
+    background-color: #b22d30;
+    background-repeat: no-repeat;
     // background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1)), url("https://cdn.dribbble.com/users/2081934/screenshots/4120763/untitled-1.png");
     // background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1)), url("https://images.unsplash.com/photo-1517433456452-f9633a875f6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
     // background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1)), url("https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
@@ -83,13 +99,13 @@
     // background-color: #0d0751;
     // background-color: #2B2F8E;
     // background-color: #5f05ab;
-    background-attachment: fixed;
-    // background-size: cover;
+    // background-attachment: fixed;
+    background-size: cover;
     background-position: center;
     color: #ffffff;
     // background-color: rgb(95, 5, 171);
     width: 100%;
-    height: 400px !important;
+    height: 60vh !important;
     transition: 0.3s ease-in-out;
     display: flex;
     justify-content: center;
@@ -100,8 +116,8 @@
     padding-left: 10px;
     padding-right: 10px;
 
-    box-shadow: 0 4px 10px rgba(0,0,0,.1) !important;
-    -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.1) !important;
+        // box-shadow: 0 4px 10px rgba(0,0,0,.1) !important;
+        // -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.1) !important;
 
     // font-family: 'Baloo Bhai', cursive;
     // font-family: Nexa;
@@ -149,9 +165,22 @@
     }
 }
 #header.fullHeight {
-    height: 100vh !important;
+    height: 130vh !important;
     transition: 0.3s ease-in-out;
+    overflow: hidden;
+    position: relative;
     // background: rgb(95, 5, 171);
+
+    .contentHeader {
+        height: 100%;
+        position: absolute !important;
+        top: 45vh !important;
+        padding: 0 !important;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+    }
 }
 
 // #header.hide {
@@ -169,14 +198,14 @@
     padding: 16px 32px;
     border-width: 2px;
     border-style: solid;
-    border-color: rgb(95, 5, 171);
+    border-color: #b22d30;
     border-image: initial;
     border-radius: 100px;
     transition: color 0.4s ease-in-out 0s;
     overflow: hidden;
     cursor: pointer;
 
-    color: rgb(95, 5, 171) !important;
+    color: #b22d30 !important;
     text-decoration: none;
 }
 .btnMore:hover {
@@ -194,7 +223,7 @@
     left: 50%;
     width: 1em;
     height: 1em;
-    background-color: rgb(95, 5, 171);
+    background-color: #b22d30;
     transform-origin: center center;
     transform: translate3d(-50%, -50%, 0px) scale3d(0, 0, 0);
     border-radius: 50%;

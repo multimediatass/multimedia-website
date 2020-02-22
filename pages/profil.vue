@@ -144,7 +144,6 @@
     </div>
 </template>
 <script>
-import socialMedia from '@/components/socialMedia'
 import cardView from '@/components/cardView'
 import plyr from 'vue-plyr'
 
@@ -189,7 +188,6 @@ export default {
         ],
     }),
     components: {
-        socialMedia,
         cardView,
         plyr
     }

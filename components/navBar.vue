@@ -2,36 +2,38 @@
 <div>
    <v-app-bar
       app
+      absolute
       flat
       class="appbar px-0 px-md-12"
-      :color="colorNav"
       dark
-      elevate-on-scroll
-      scroll-target="#header"
-      :class="[transparentNav ? '' : 'colored']"
-      dense
+      color="transparent"
     >
 
-      <v-avatar
+      <!-- <v-avatar
         size="35"
-        color="indigo"
+        color="transparent"
         class="mr-2"
         tile
       >
-        <img :src="require('@/assets/img/logo/logo_mulmed2.png')" alt="alt">
-      </v-avatar>
+         <v-img
+          width="35"
+          transition="fade-transition"
+          :src="require('@/assets/img/logo/logo.png')"
+          :lazy-src="require('@/assets/img/logo/logo-2.svg')"
+        ></v-img>
+      </v-avatar> -->
 
-      <v-toolbar-title><v-btn small text :ripple="false" outlined>/{{titlePage}}</v-btn></v-toolbar-title>
+      <v-toolbar-title v-show="!this.$store.state.headerInfo.fullHeight" :class="[$vuetify.breakpoint.smAndDown ? 'subtitle-2' : 'subtitle-2']" >Multimedia Laboratory</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
         <template v-for="item in items">
           
-          <v-btn v-if="item.child.length == 0" :key="item.title" small :to="item.link" text>{{item.title}}</v-btn>
+          <v-btn v-if="item.child.length == 0" :key="item.title" small :to="item.link" text :ripple="false" flat>{{item.title}}</v-btn>
           <v-menu v-else open-on-hover offset-y transition="slide-y-transition" bottom>
             <template v-slot:activator="{ on }">
-              <v-btn small text :key="item.title" v-on="on" :class="[childActive ? 'v-btn--active' : '']">{{item.title}}</v-btn>
+              <v-btn small text flat :key="item.title" v-on="on" :class="[childActive ? 'v-btn--active' : '']">{{item.title}}</v-btn>
             </template>
             <v-list>
 
@@ -72,6 +74,7 @@
 
         </template>
       </v-toolbar-items>
+      <v-btn class="ml-4" color="white" to="/join" light style="color: #b22d30" flat>JOIN</v-btn>
 
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawerAct"></v-app-bar-nav-icon>
     
@@ -128,11 +131,13 @@ export default {
         activeBtn: 1,
         items: [
           { title: 'Beranda', icon: 'mdi-home', link: '/', child: [] },
-          { title: 'Tentang', icon: 'mdi-account', link: '/about', child: [
-            { title: 'Laboratorium', subtitle: 'Tentang Lab Multimedia', icon: 'mdi-rocket', link: '/profil' },
-            { title: 'Produk', subtitle: 'Produk Lab Multimedia', icon: 'mdi-launch', link: '/produk' },
-            { title: 'Aktivitas', subtitle: 'Aktivitas Lab Multimedia', icon: 'mdi-timelapse', link: '/aktivitas' }
-          ] },
+          { title: 'Produk', icon: 'mdi-launch', link: '/produk', child: [] },
+          { title: 'Aktivitas', icon: 'mdi-timelapse', link: '/aktivitas', child: [] },
+          // { title: 'Tentang', icon: 'mdi-account', link: '/about', child: [
+          //   { title: 'Laboratorium', subtitle: 'Tentang Lab Multimedia', icon: 'mdi-rocket', link: '/profil' },
+          //   { title: 'Produk', subtitle: 'Produk Lab Multimedia', icon: 'mdi-launch', link: '/produk' },
+          //   { title: 'Aktivitas', subtitle: 'Aktivitas Lab Multimedia', icon: 'mdi-timelapse', link: '/aktivitas' }
+          // ] },
           // { title: 'Peminjaman', icon: 'mdi-equal-box', link: '/peminjaman', child: [] }
         ]
     }),
@@ -164,7 +169,7 @@ export default {
         if (this.transparentNav == true) {
           return "transparent"
         }else {
-          return "#180cac"
+          return "#ffffff"
         }
       }
     },

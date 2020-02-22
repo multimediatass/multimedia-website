@@ -40,7 +40,7 @@
             <h3 class="tagText">{{tag}}</h3>
             <h1 class="titleText">{{title}}</h1>
             <p class="subtitleText">{{subtitle}}</p>
-            <NuxtLink v-if="link != ''" :to="link" class="btnMore">Baca Selengkapnya</NuxtLink>
+            <NuxtLink v-if="link != ''" :to="link" class="btnMore">{{textBtn || "Baca Selengkapnya"}}</NuxtLink>
         </div>
     </template>
     <template v-else-if="imgPosition == 'right'">
@@ -48,7 +48,7 @@
             <h3 class="tagText">{{tag}}</h3>
             <h1 class="titleText">{{title}}</h1>
             <p class="subtitleText">{{subtitle}}</p>
-            <NuxtLink v-if="link != ''" :to="link" class="btnMore">Baca Selengkapnya</NuxtLink>
+            <NuxtLink v-if="link != ''" :to="link" class="btnMore">{{textBtn || "Baca Selengkapnya"}}</NuxtLink>
         </div>
         <div v-if="image.length != 0" class="contentImg" :class="contain ? 'contain' : ''">
             <!-- <v-img
@@ -89,7 +89,7 @@
             <h3 class="tagText">{{tag}}</h3>
             <h1 class="titleText">{{title}}</h1>
             <p class="subtitleText">{{subtitle}}</p>
-            <NuxtLink v-if="link != ''" :to="link" class="btnMore">Baca Selengkapnya</NuxtLink>
+            <NuxtLink v-if="link != ''" :to="link" class="btnMore">{{textBtn || "Baca Selengkapnya"}}</NuxtLink>
         </div>
     </template>
     <template v-else>
@@ -121,7 +121,7 @@
             <h3 class="tagText">{{tag}}</h3>
             <h1 class="titleText">{{title}}</h1>
             <p class="subtitleText">{{subtitle}}</p>
-            <NuxtLink v-if="link != ''" :to="link" class="btnMore">Baca Selengkapnya</NuxtLink>
+            <NuxtLink v-if="link != ''" :to="link" class="btnMore">{{textBtn || "Baca Selengkapnya"}}</NuxtLink>
         </div>
     </template>
 
@@ -138,7 +138,8 @@ export default {
         imgPosition: String,
         link: String,
         tag: String,
-        contain: Boolean
+        contain: Boolean,
+        textBtn: String
     },
     components: {
         plyr

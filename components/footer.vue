@@ -16,11 +16,14 @@
     </v-flex>
   </div>
   <div class="rightContent">
-    <v-img
-      :src="require('@/assets/img/logo/logo_mulmed.png')"
-      :lazy-src="require('@/assets/img/logo/logo_mulmed.png')"
+    <!-- <v-img
+      width="45"
+      transition="fade-transition"
+      :src="require('@/assets/img/logo/logo.png')"
+      :lazy-src="require('@/assets/img/logo/logo-2.svg')"
       class="mx-5"
-    ></v-img>
+    ></v-img> -->
+    <span>&copy; 2020 Multimedia Research Laboratory</span>
   </div>
 </v-footer>
 </v-container>

@@ -3,14 +3,21 @@
     <navBar/>
     <Header/>
     <v-overlay :value="loading">
-      <v-progress-circular indeterminate size="64"></v-progress-circular>
+      <v-progress-circular indeterminate size="64">
+        <!-- <v-img
+          width="40"
+          transition="fade-transition"
+          :src="require('@/assets/img/logo/logo-2.svg')"
+          :lazy-src="require('@/assets/img/logo/logo-2.svg')"
+        ></v-img> -->
+      </v-progress-circular>
     </v-overlay>
     <v-content style="background: #ffffff !important;" class="py-0">
         <nuxt />
     </v-content>
     <Footer/>
     <back-to-top bottom="25px" right="25px">
-      <v-btn fab dark color="purple darken-2"><v-icon>mdi-chevron-up</v-icon></v-btn>
+      <v-btn fab dark color="#b22d30"><v-icon>mdi-chevron-up</v-icon></v-btn>
     </back-to-top>
 </v-app>
 </template>
