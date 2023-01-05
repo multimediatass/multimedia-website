@@ -21,7 +21,7 @@
     "express": "^4.16.4",
     "firebase": "^7.5.2",
     "moment": "^2.24.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "nuxt-fire": "^3.5.4",
     "nuxt-sweetalert2": "^1.0.0",
     "vue-backtotop": "^1.6.1",
